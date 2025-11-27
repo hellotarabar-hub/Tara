@@ -1,7 +1,6 @@
 
   # Responsive Next.js Website for Tara
 
-  This is a code bundle for Responsive Next.js Website for Tara. The original project is available at https://www.figma.com/design/qLyF8nW6qFpJgUCk0Vv0Do/Responsive-Next.js-Website-for-Tara.
 
   ## Running the code
 
