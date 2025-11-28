@@ -1,8 +1,5 @@
 
-  # Responsive Next.js Website for Tara
 
-
-  ## Running the code
 
   Run `npm i` to install the dependencies.
 
