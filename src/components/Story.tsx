@@ -296,7 +296,7 @@ export default function Story({ onPopupTrigger }: StoryProps) {
               "
             >
               <ImageWithFallback
-                src="./src/images/nyc.png"
+                src="/nyc.png"
                 alt="Healthy lifestyle"
                 className="w-full h-full object-cover"
               />

@@ -128,7 +128,7 @@ export default function Secret() {
               "
             >
               <ImageWithFallback
-                src="src/images/konjac.png"
+                src="/konjac.png"
                 alt="Konjac Root"
                 className="w-full max-h-[160px] md:max-h-[200px] lg:max-h-[220px] object-contain"
               />

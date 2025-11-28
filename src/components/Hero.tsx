@@ -305,7 +305,7 @@ export default function Hero() {
             <div className="absolute inset-0 bg-gradient-to-br from-neutral-700/20 via-transparent to-transparent rounded-full blur-3xl" />
             <div className="relative w-full max-w-[900px] md:max-w-[900px] lg:max-w-[900px] h-[500px] md:h-[600px] lg:h-[700px] flex items-center justify-center">
               <ImageWithFallback
-                src="./src/images/hero_tara.png"
+                src="/hero_tara.png"  
                 alt="TARA Protein Bar"
                 className="w-full h-full object-contain relative z-10 rounded-3xl lg:rounded-[2.5rem]"
               />

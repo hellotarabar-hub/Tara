@@ -339,7 +339,7 @@ export default function Nutrition() {
               className="relative w-full h-full overflow-hidden rounded-3xl bg-neutral-100 max-w-[600px]"
             >
               <ImageWithFallback
-                src="./src/images/7.jpg"
+                src="/7.jpg"
                 alt="Healthy protein snack"
                 className="w-full h-full object-cover"
               />

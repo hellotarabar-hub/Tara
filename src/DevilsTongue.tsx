@@ -190,7 +190,7 @@ export default function DevilsTongue() {
               className="relative h-[600px] overflow-hidden"
             >
               <ImageWithFallback
-                src="https://images.unsplash.com/photo-1658354628278-07aae68a61ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxrb25qYWMlMjByb290JTIwcGxhbnR8ZW58MXx8fHwxNzYyODkxOTQzfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                src="./assets/konjac-root.jpg"
                 alt="Konjac root plant"
                 className="w-full h-full object-cover"
               />
@@ -260,7 +260,7 @@ export default function DevilsTongue() {
                 className="absolute inset-0 -top-20 -bottom-20"
               >
                 <ImageWithFallback
-                  src="https://images.unsplash.com/photo-1546553836-33b20490e87e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxndXQlMjBoZWFsdGglMjB3ZWxsbmVzc3xlbnwxfHx8fDE3NjI4NDc3MTB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                  src="./assets/gut-health-wellness.jpg"
                   alt="Gut health wellness"
                   className="w-full h-full object-cover"
                 />

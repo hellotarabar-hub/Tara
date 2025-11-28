@@ -325,19 +325,19 @@ export default function Mission() {
       title: "Fuel",
       heading:
         "Complete plant protein and nut butters provide sustained strength and energy for your active lifestyle.",
-      image: "./src/images/1.png",
+      image: "/1.png",
     },
     {
       title: "Absorb",
       heading:
         "Low-FODMAP konjac fiber supports gentle digestion, optimal nutrient uptake, and natural satiety.",
-      image: "./src/images/2.png",
+      image: "/2.png",
     },
     {
       title: "Recover",
       heading:
         "Magnesium, potassium, and zinc replenish electrolytes, reduce fatigue, and help your body recover efficiently.",
-      image: "./src/images/3.png",
+      image: "/3.png",
     },
   ];
 
