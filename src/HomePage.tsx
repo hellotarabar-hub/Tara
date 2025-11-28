@@ -8,6 +8,9 @@ import Mission from './components/Mission';
 import Secret from './components/Secret';
 import Nutrition from './components/Nutrition';
 import CTA from './components/CTA';
+
+// ⭐ NEW: Import modal component
+
 // import WaitlistPopup from './components/WaitlistPopup';
 import ScrollProgress from './components/ScrollProgress';
 

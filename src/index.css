@@ -2556,3 +2556,15 @@ html {
   inherits: false;
   initial-value: 1;
 }
+
+
+
+html, body {
+  overflow-x: hidden;
+}
+
+/* Optional: make sure all images and media are responsive */
+img, video, svg {
+  max-width: 100%;
+  height: auto;
+}

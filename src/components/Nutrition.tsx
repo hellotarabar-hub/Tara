@@ -191,24 +191,10 @@
 
 
 
-
-import { useRef } from "react";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 
 export default function Nutrition() {
-  const ref = useRef(null);
-  const imageRef = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
-
-  const { scrollYProgress } = useScroll({
-    target: imageRef,
-    offset: ["start end", "end start"],
-  });
-
-  const imageY = useTransform(scrollYProgress, [0, 1], ["20%", "-20%"]);
-  const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1, 1.1]);
-
   const nutritionStats = [
     { value: "200", label: "calories" },
     { value: "20g", label: "complete plant protein" },
@@ -227,54 +213,54 @@ export default function Nutrition() {
   return (
     <section
       id="nutrition"
-      ref={ref}
-      className="relative py-20 px-4 md:px-6 lg:px-8"
+      className="relative py-20 px-4 md:px-6 lg:px-8 overflow-hidden"
+      style={{
+        background: `
+          radial-gradient(circle at 90% 75%, rgba(223, 217, 222, 0.2) 0px, transparent 40%),
+          radial-gradient(circle at 1% 55%, rgba(238, 232, 226, 0.1) 0px, transparent 30%),
+          linear-gradient(135deg, rgba(235, 230, 225, 0.1) 0%, rgba(238, 232, 226, 0.05) 50%)
+        `,
+      }}
     >
-      <div className="max-w-7xl mx-auto w-full">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
 
-          {/* Content Side */}
+          {/* TEXT SIDE */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="space-y-10 sm:space-y-12"
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="space-y-10"
           >
-            <div>
-              <h2
-                className="text-neutral-900 mb-6 sm:mb-8 tracking-tight"
-                style={{
-                  fontSize: "clamp(2rem, 5vw, 3.5rem)",
-                  fontWeight: 200,
-                  lineHeight: 1.15,
-                }}
-              >
-                You Deserve Better
-              </h2>
-              <p
-                className="text-neutral-600 tracking-wide leading-relaxed max-w-3xl"
-                style={{
-                  fontSize: "clamp(0.95rem, 1.5vw, 1.25rem)",
-                  fontWeight: 300,
-                  lineHeight: 1.8,
-                }}
-              >
-                Scientifically formulated for active recovery and digestive comfort.
-              </p>
-            </div>
+            <h2
+              className="text-neutral-900 tracking-tight"
+              style={{
+                fontSize: "clamp(2.5rem, 5vw, 3.5rem)",
+                fontWeight: 200,
+                lineHeight: 1.2,
+              }}
+            >
+              You Deserve Better
+            </h2>
+
+            <p
+              className="text-neutral-600 leading-relaxed max-w-3xl"
+              style={{
+                fontSize: "clamp(1rem, 2vw, 1.25rem)",
+                lineHeight: 1.8,
+                fontWeight: 300,
+              }}
+            >
+              Scientifically formulated for active recovery and digestive comfort.
+            </p>
 
             {/* Nutrition Stats */}
             <div className="grid grid-cols-2 sm:grid-cols-2 gap-4 sm:gap-6">
               {nutritionStats.map((stat, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
-                  className="group"
-                >
+                <div key={index} className="space-y-1">
                   <div
-                    className="text-neutral-900 mb-1 sm:mb-2"
+                    className="text-neutral-900"
                     style={{ fontSize: "2.5rem", fontWeight: 200 }}
                   >
                     {stat.value}
@@ -285,73 +271,54 @@ export default function Nutrition() {
                   >
                     {stat.label.toUpperCase()}
                   </div>
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={isInView ? { width: "30px" } : {}}
-                    transition={{ duration: 0.5, delay: 0.7 + index * 0.1 }}
-                    className="h-px bg-neutral-300 mt-2 group-hover:w-14 group-hover:bg-neutral-900 transition-all duration-300"
-                  />
-                </motion.div>
+                </div>
               ))}
             </div>
 
             {/* Benefits */}
             <div className="space-y-3 sm:space-y-4">
               {benefits.map((benefit, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -15 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-                  className="flex items-center gap-3 sm:gap-4"
-                >
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={isInView ? { scale: 1 } : {}}
-                    transition={{ duration: 0.4, delay: 0.9 + index * 0.1 }}
-                    className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-neutral-400 rounded-full group-hover:w-2.5 group-hover:h-2.5 group-hover:bg-neutral-900 transition-all duration-300"
-                  />
-                  <span
-                    className="text-neutral-600 tracking-wide leading-relaxed transition-colors duration-300"
+                <div key={index} className="flex items-start gap-3">
+                  <div className="w-1 h-1 bg-neutral-400 rounded-full mt-2" />
+                  <p
+                    className="text-neutral-600 leading-relaxed"
                     style={{
-                      fontSize: "clamp(0.95rem, 1.5vw, 1.2rem)",
+                      fontSize: "clamp(1rem, 2vw, 1.2rem)",
                       fontWeight: 300,
                       lineHeight: 1.7,
                     }}
                   >
                     {benefit}
-                  </span>
-                </motion.div>
+                  </p>
+                </div>
               ))}
             </div>
           </motion.div>
 
-          {/* Image Side with Parallax */}
+          {/* IMAGE SIDE */}
           <motion.div
-            ref={imageRef}
             initial={{ opacity: 0, x: 40 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-            className="relative h-80 sm:h-[400px] md:h-[550px] lg:h-[750px] overflow-hidden rounded-xl flex justify-center items-center"
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="flex justify-center items-start"
           >
-            <motion.div
-              style={{ y: imageY, scale: imageScale }}
-              className="relative w-full h-full overflow-hidden rounded-3xl bg-neutral-100 max-w-[600px]"
+            <div
+              className="
+                relative overflow-hidden rounded-3xl bg-neutral-100 w-full
+                max-w-[280px] aspect-[4/5]
+                sm:max-w-[340px] sm:aspect-[4/5]
+                md:max-w-[400px] md:aspect-[5/6]
+                lg:max-w-[500px] lg:aspect-[5/6]
+                mx-auto
+              "
             >
               <ImageWithFallback
-                src="/7.jpg"
+                src="/7.png"
                 alt="Healthy protein snack"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
-            </motion.div>
-
-            {/* Overlay accent */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : {}}
-              transition={{ duration: 1, delay: 0.8 }}
-              className="absolute inset-0 bg-gradient-to-t from-neutral-50 via-transparent to-transparent"
-            />
+            </div>
           </motion.div>
 
         </div>
@@ -359,3 +326,6 @@ export default function Nutrition() {
     </section>
   );
 }
+
+
+
