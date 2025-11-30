@@ -10,35 +10,78 @@ export default function Privacy() {
         className="max-w-4xl mx-auto text-white"
       >
         <h1 className="text-4xl sm:text-5xl font-light mb-8 tracking-tight">Privacy Policy</h1>
-        <p className="text-white/70 mb-6">Effective Date: October 14, 2025 · Last Updated: October 14, 2025</p>
+        <p className="text-white/70 mb-6">Effective Date: November 25, 2025 · Last Updated: November 29, 2025</p>
 
         <p className="mb-6 text-white/80 leading-relaxed">
-          TARA Nutrition, LLC (“we,” “our,” or “us”) respects your privacy and is committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you visit our website or sign up for updates.
+          TARA Nutrition, LLC (“we,” “our,” or “us”) respects your privacy and is committed to protecting your personal information. This Privacy Policy explains how we collect, use, store, and protect your data when you visit our website, subscribe to our mailing list, or use our services.
         </p>
 
         <h2 className="text-2xl font-light mb-4 mt-8">1. Information We Collect</h2>
         <ul className="list-disc list-inside text-white/80 mb-6">
-          <li>Your email address when you subscribe to our waitlist, promotions, or updates.</li>
-          <li>Automatically collected data, including IP address, browser type, device information, and site usage through cookies, analytics tools (e.g., Google Analytics), and local storage.</li>
-          <li>LocalStorage data used to enhance user experience, such as popup display settings and waitlist counters.</li>
+          <li>Email addresses and contact information when you subscribe to our waitlist, promotions, or updates.</li>
+          <li>Automatically collected data, including IP address, browser type, device information, and usage analytics through cookies, local storage, and tracking tools (e.g., Google Analytics).</li>
+          <li>LocalStorage data for UI/UX purposes, such as popup cooldowns, waitlist counters, and display preferences.</li>
         </ul>
 
         <h2 className="text-2xl font-light mb-4 mt-8">2. How We Use Your Information</h2>
         <p className="mb-6 text-white/80 leading-relaxed">
-          To send you updates about Tara Bar, including product launches, promotions, and waitlist invitations; to improve website functionality, performance, and user experience; and to personalize your interactions and track usage patterns for analytics purposes.
+          We use your information to:
         </p>
+        <ul className="list-disc list-inside text-white/80 mb-6">
+          <li>Send updates, marketing emails, promotions, and waitlist invitations.</li>
+          <li>Improve website functionality, performance, and user experience.</li>
+          <li>Analyze site usage and trends for analytics and business insights.</li>
+          <li>Personalize your experience and communications.</li>
+        </ul>
 
-        <h2 className="text-2xl font-light mb-4 mt-8">3. Consent and Lawful Basis</h2>
+        <h2 className="text-2xl font-light mb-4 mt-8">3. Legal Basis and Consent</h2>
         <p className="mb-6 text-white/80 leading-relaxed">
-          By using our website or providing your email address, you consent to the collection and use of your personal information as described in this Privacy Policy. You may withdraw consent at any time by clicking “unsubscribe” in our emails or contacting us directly.
+          By using our Site or providing your personal information, you consent to its collection and use as described here. You may withdraw consent at any time by unsubscribing from our emails or contacting us directly.
         </p>
 
-        <h2 className="text-2xl font-light mb-4 mt-8">4. Cookies, Analytics, and Local Storage</h2>
+        <h2 className="text-2xl font-light mb-4 mt-8">4. Your Rights (GDPR/CCPA)</h2>
         <p className="mb-6 text-white/80 leading-relaxed">
-          We use cookies and similar technologies (such as Google Analytics) to collect site usage data. Cookies help us analyze trends, track user movement, and improve site functionality. Local storage is used for UI/UX purposes only (e.g., waitlist counters, popup cooldowns). You may disable cookies in your browser settings, but some features may not function correctly.
+          If you are located in the EU or California, you have rights under GDPR and CCPA, including:
+        </p>
+        <ul className="list-disc list-inside text-white/80 mb-6">
+          <li>Access your personal data.</li>
+          <li>Request correction or deletion of your data.</li>
+          <li>Object to processing or withdraw consent.</li>
+          <li>Opt-out of sale or sharing of personal information (where applicable).</li>
+          <li>Request a copy of your data in a portable format.</li>
+        </ul>
+
+        <h2 className="text-2xl font-light mb-4 mt-8">5. Cookies, Analytics, and Tracking</h2>
+        <p className="mb-6 text-white/80 leading-relaxed">
+          We use cookies, local storage, and tracking technologies to enhance site functionality, analyze trends, and improve your experience. You can disable cookies in your browser, but some features may not function properly.
         </p>
 
-        <h2 className="text-2xl font-light mb-4 mt-8">Contact Us</h2>
+        <h2 className="text-2xl font-light mb-4 mt-8">6. Sharing and Third Parties</h2>
+        <p className="mb-6 text-white/80 leading-relaxed">
+          We do not sell your personal information. Data may be shared with service providers who perform services on our behalf (e.g., email delivery, analytics). Third-party links on the Site are not controlled by us, and we are not responsible for their privacy practices.
+        </p>
+
+        <h2 className="text-2xl font-light mb-4 mt-8">7. Security</h2>
+        <p className="mb-6 text-white/80 leading-relaxed">
+          We implement reasonable administrative, technical, and physical safeguards to protect your information. However, no method of transmission or storage is 100% secure, and we cannot guarantee absolute security.
+        </p>
+
+        <h2 className="text-2xl font-light mb-4 mt-8">8. International Users</h2>
+        <p className="mb-6 text-white/80 leading-relaxed">
+          By using this Site, international users agree to comply with local laws regarding privacy, online services, and marketing. GDPR and CCPA rights apply where relevant.
+        </p>
+
+        <h2 className="text-2xl font-light mb-4 mt-8">9. Compliance with Law</h2>
+        <p className="mb-6 text-white/80 leading-relaxed">
+          We comply with New York consumer protection laws and federal regulations governing online marketing and email communications (e.g., CAN-SPAM Act). Users are responsible for ensuring compliance with applicable local laws.
+        </p>
+
+        <h2 className="text-2xl font-light mb-4 mt-8">10. Updates to Privacy Policy</h2>
+        <p className="mb-6 text-white/80 leading-relaxed">
+          We may update this Privacy Policy at any time. Updated versions will be posted here with a new “Last Updated” date. Continued use constitutes acceptance of the revised Privacy Policy.
+        </p>
+
+        <h2 className="text-2xl font-light mb-4 mt-8">11. Contact Us</h2>
         <p className="mb-6 text-white/80 leading-relaxed">
           Email: <a href="mailto:hello@eattara.com" className="underline hover:text-white/60">hello@eattara.com</a><br />
           Company: TARA Nutrition, LLC

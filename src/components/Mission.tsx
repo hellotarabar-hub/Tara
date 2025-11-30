@@ -345,7 +345,7 @@ export default function Mission() {
     <section
       id="function"
       ref={ref}
-      className="relative bg-neutral-50 overflow-hidden py-32"
+      className="relative bg-neutral-50 overflow-hidden py-20"
     >
       {/* ✅ Updated container to match Story/Secret */}
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
@@ -400,7 +400,7 @@ export default function Mission() {
               className="group relative bg-white rounded-3xl overflow-hidden border border-neutral-200 hover:border-purple-600 transition-all duration-500 hover:shadow-2xl"
             >
               {/* Image */}
-              <div className="relative h-64 sm:h-72 md:h-64 overflow-hidden rounded-t-3xl">
+              <div className="relative h-94 sm:h-72 md:h-64 overflow-hidden rounded-t-3xl">
                 <ImageWithFallback
                   src={ingredient.image}
                   alt={ingredient.title}
@@ -423,7 +423,7 @@ export default function Mission() {
                   style={{
                     fontSize: "clamp(1rem, 2vw, 1.25rem)",
                     fontWeight: 300,
-                    lineHeight: 1.8,
+                    lineHeight: 1.6,
                   }}
                 >
                   {ingredient.heading}

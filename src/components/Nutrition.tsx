@@ -216,9 +216,10 @@ export default function Nutrition() {
       className="relative py-20 px-4 md:px-6 lg:px-8 overflow-hidden"
       style={{
         background: `
-          radial-gradient(circle at 90% 75%, rgba(223, 217, 222, 0.2) 0px, transparent 40%),
-          radial-gradient(circle at 1% 55%, rgba(238, 232, 226, 0.1) 0px, transparent 30%),
-          linear-gradient(135deg, rgba(235, 230, 225, 0.1) 0%, rgba(238, 232, 226, 0.05) 50%)
+          radial-gradient(circle at 90% 75%, rgba(223, 217, 222, 1) 0px, transparent 40%),
+          radial-gradient(circle at 1% 55%, rgba(238, 232, 226, 0.64) 0px, transparent 30%),
+          radial-gradient(at 98% 10%, rgba(239, 234, 226, 0.5) 0px, transparent 25%),
+          linear-gradient(135deg, rgba(235, 230, 225, 0.82) 0%, rgba(238, 232, 226, 0.5) 50%, rgba(239, 234, 226, 0.5) 100%)
         `,
       }}
     >
@@ -231,7 +232,7 @@ export default function Nutrition() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="space-y-10"
+            className="space-y-6"
           >
             <h2
               className="text-neutral-900 tracking-tight"

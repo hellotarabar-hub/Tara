@@ -230,7 +230,7 @@ export default function Story({ onPopupTrigger }: StoryProps) {
         relative
         bg-neutral-50
         overflow-hidden
-        py-32              /* SAME AS BEFORE */
+        py-20              /* SAME AS BEFORE */
         px-6 lg:px-12      /* SAME AS BEFORE */
       "
     >

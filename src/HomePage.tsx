@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Preloader from './components/Preloader';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -7,22 +7,14 @@ import Story from './components/Story';
 import Mission from './components/Mission';
 import Secret from './components/Secret';
 import Nutrition from './components/Nutrition';
-import CTA from './components/CTA';
-
-// ⭐ NEW: Import modal component
-
-// import WaitlistPopup from './components/WaitlistPopup';
+import WaitlistPopup from './components/WaitlistPopup';
 import ScrollProgress from './components/ScrollProgress';
+import CTA from './components/CTA';
 
 export default function HomePage() {
   const [showContent, setShowContent] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [hasShownPopup, setHasShownPopup] = useState(false);
-
-  // ⭐ NEW: Add modal state
-  const [nutritionOpen, setNutritionOpen] = useState(false);
-
-  // SEO and metadata…
 
   const handlePopupTrigger = () => {
     if (!hasShownPopup) {
@@ -41,35 +33,23 @@ export default function HomePage() {
       {showContent && (
         <div className="relative antialiased">
           <Navbar />
-
           <ScrollProgress />
 
           <main>
             <Hero />
-            
             <IntroSection />
-             
             <Story onPopupTrigger={handlePopupTrigger} />
-             <Secret />
+            <Secret />
             <Mission />
-        
-      
-
-            {/* ⭐ Proper modal usage */}
-            <Nutrition
-              // isOpen={nutritionOpen}
-              // onClose={() => setNutritionOpen(false)}
-            />
-
-            <CTA />
+            <Nutrition />
+            <CTA /> {/* Only one CTA now */}
           </main>
 
-          {/* <WaitlistPopup isOpen={showPopup} onClose={handleClosePopup} /> */}
+          <WaitlistPopup isOpen={showPopup} onClose={handleClosePopup} />
+
+ 
         </div>
       )}
     </>
   );
 }
-
-
-

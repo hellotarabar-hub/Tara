@@ -1,33 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="build/favicon.png" />
+    <!-- Basic Meta -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tara</title>
+    <title>Tara – Fuel Well. Recover Better.</title>
 
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WRXWLQPENS"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-WRXWLQPENS');
-    </script>
+    <!-- SEO -->
+    <meta
+      name="description"
+      content="TARA protein bars — 20g plant protein, gut-friendly fiber, minerals, and clean ingredients to help you fuel well and recover better."
+    />
+
+    <!-- OpenGraph (Social Sharing) -->
+    <meta property="og:title" content="Tara – Fuel Well. Recover Better." />
+    <meta
+      property="og:description"
+      content="Premium plant-based protein bars designed for performance, gut health, and recovery."
+    />
+    <meta property="og:image" content="/og-image.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://eattara.com" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
 
   <body>
+    <!-- React App Mount -->
     <div id="root"></div>
-    
+
+    <!-- Mailchimp -->
     <script id="mcjs">
-      !function(c,h,i,m,p){
-        m=c.createElement(h),
-        p=c.getElementsByTagName(h)[0],
-        m.async=1,
-        m.src=i,
-        p.parentNode.insertBefore(m,p)
-      }(document,"script","https://chimpstatic.com/mcjs-connected/js/users/55288db69ea3107690efe06f6/e1514f0febefcfcfc5ff18896.js");
+      !(function (c, h, i, m, p) {
+        m = c.createElement(h);
+        p = c.getElementsByTagName(h)[0];
+        m.async = 1;
+        m.src =
+          "https://chimpstatic.com/mcjs-connected/js/users/55288db69ea3107690efe06f6/e1514f0febefcfcfc5ff18896.js";
+        p.parentNode.insertBefore(m, p);
+      })(document, "script");
     </script>
 
+    <!-- Vite / React Main Script -->
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

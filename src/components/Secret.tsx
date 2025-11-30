@@ -5,7 +5,7 @@ export default function Secret() {
   return (
     <section
       id="secret"
-      className="relative py-32 overflow-hidden"
+      className="relative py-20 overflow-hidden"
       style={{
         background: `
           radial-gradient(circle at 90% 75%, rgba(223, 217, 222, 1) 0px, transparent 40%),
@@ -73,7 +73,7 @@ export default function Secret() {
               </h2>
 
               <div
-                className="space-y-4 text-neutral-600"
+                className="space-y-2 text-neutral-600"
                 style={{
                   fontSize: "clamp(1rem, 2vw, 1.25rem)",
                   lineHeight: 1.8,
