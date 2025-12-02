@@ -184,9 +184,9 @@ export default function Navbar() {
 
   const navLinks = [
     { name: 'Benefits', id: 'benefits' },
+        { name: 'Secret', id: 'secret' },
     { name: 'Function', id: 'function' },
     { name: 'Nutrition', id: 'nutrition' },
-    { name: 'Secret', id: 'secret' },
     { name: 'Join', id: 'cta' },
   ];
 

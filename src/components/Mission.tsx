@@ -354,7 +354,7 @@ export default function Mission() {
           initial={{ opacity: 0, x: -40 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="mb-20 space-y-6"
+          className="mb-10 space-y-6"
         >
           <motion.div
             initial={{ width: 0 }}

@@ -330,11 +330,23 @@
 
 
 
-
 import { motion } from 'motion/react';
 import { useInView } from 'motion/react';
 import { useRef, useState } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Instagram } from 'lucide-react';
+
+// TikTok icon (inline SVG)
+const TikTok = () => (
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 256 256"
+    fill="currentColor"
+    aria-hidden="true"
+  >
+    <path d="M240 80.7v44.7a94.8 94.8 0 0 1-54-16.7v59.3a88 88 0 1 1-88-88 89 89 0 0 1 13.5 1v47.2a40.9 40.9 0 1 0 28 38.8V16h46.5a54 54 0 0 0 54 54.7Z" />
+  </svg>
+);
 
 export default function CTA() {
   const ref = useRef(null);
@@ -420,7 +432,7 @@ export default function CTA() {
                 WELCOME TO TARA
               </p>
               <p className="text-white/60 mt-2 text-sm tracking-wide" style={{ fontWeight: 300 }}>
-                    Thank you for joining our waitlist!
+                Thank you for joining our waitlist!
               </p>
             </motion.div>
           ) : (
@@ -455,8 +467,11 @@ export default function CTA() {
       <div className="absolute bottom-0 left-0 right-0 z-20 border-t border-white/10">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-6">
           <div className="flex flex-col sm:flex-row items-center justify-between text-white/40 gap-4 text-xs tracking-wide">
+            
             <p style={{ letterSpacing: '0.1em' }}>© 2025 TARA Nutrition, LLC</p>
-            <div className="flex gap-8">
+
+            <div className="flex items-center gap-8">
+              {/* Privacy & Terms */}
               <button
                 onClick={() => window.open('/privacy', '_blank', 'width=1000,height=800')}
                 className="hover:text-white/80 transition-colors tracking-wide"
@@ -464,6 +479,7 @@ export default function CTA() {
               >
                 Privacy
               </button>
+
               <button
                 onClick={() => window.open('/terms', '_blank', 'width=1000,height=800')}
                 className="hover:text-white/80 transition-colors tracking-wide"
@@ -471,6 +487,26 @@ export default function CTA() {
               >
                 Terms
               </button>
+
+              {/* Social Icons */}
+              <div className="flex items-center gap-6 text-white/40">
+                <a
+                  href="https://instagram.com/havesome.tara"
+                  target="_blank"
+                  className="hover:text-white transition-colors"
+                >
+                  <Instagram size={18} />
+                </a>
+
+                <a
+                  href="https://www.tiktok.com/@havesome.tara"
+                  target="_blank"
+                  className="hover:text-white transition-colors"
+                >
+                  <TikTok />
+                </a>
+              </div>
+
             </div>
           </div>
         </div>
