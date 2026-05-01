@@ -50,54 +50,215 @@
 
 
 // src/Router.tsx
-import { useState, useEffect } from 'react';
-import HomePage from './HomePage';
-import DevilsTongue from './DevilsTongue';
-import ScienceResearch from './ScienceResearch';
-import Privacy from './Privacy';
-import Terms from './Terms';
+// import { useState, useEffect } from 'react';
+// import HomePage from './HomePage';
+// import DevilsTongue from './DevilsTongue';
+// import ScienceResearch from './ScienceResearch';
+// import Privacy from './Privacy';
+// import Terms from './Terms';
+// import Join from "./formPage/Join";
+
+// export default function Router() {
+//   const [currentPath, setCurrentPath] = useState<string>(window.location.pathname);
+
+//   // Update path when using browser back/forward buttons
+//   useEffect(() => {
+//     const handlePopState = () => setCurrentPath(window.location.pathname);
+//     window.addEventListener('popstate', handlePopState);
+//     return () => window.removeEventListener('popstate', handlePopState);
+//   }, []);
+
+//   // Intercept <a href="/..."> clicks to handle SPA navigation
+//   useEffect(() => {
+//     const handleClick = (e: MouseEvent) => {
+//       const target = e.target as HTMLElement;
+//       const anchor = target.closest('a');
+
+//       if (anchor && anchor.getAttribute('href')?.startsWith('/')) {
+//         e.preventDefault();
+//         const newPath = anchor.getAttribute('href') || '/';
+//         if (newPath !== currentPath) {
+//           window.history.pushState({}, '', newPath);
+//           setCurrentPath(newPath);
+//           window.scrollTo({ top: 0, behavior: 'instant' });
+//         }
+//       }
+//     };
+
+//     document.addEventListener('click', handleClick);
+//     return () => document.removeEventListener('click', handleClick);
+//   }, [currentPath]);
+
+//   // ROUTES
+//   switch (currentPath) {
+//     case '/devils-tongue':
+//       return <DevilsTongue />;
+//     case '/science-research':
+//       return <ScienceResearch />;
+//     case '/privacy':
+//       return <Privacy />;
+//     case '/terms':
+//       return <Terms />;
+//     default:
+//       return <HomePage />;
+//   }
+// }
+
+
+
+
+
+// import { useState, useEffect } from "react";
+
+// import HomePage from "./HomePage";
+// import DevilsTongue from "./DevilsTongue";
+// import ScienceResearch from "./ScienceResearch";
+// import Privacy from "./Privacy";
+// import Terms from "./Terms";
+// import Join from "./formPage/Join";
+
+// export default function Router() {
+//   const [currentPath, setCurrentPath] = useState<string>(
+//     window.location.pathname
+//   );
+
+//   // Handle back/forward navigation
+//   useEffect(() => {
+//     const handlePopState = () => {
+//       setCurrentPath(window.location.pathname);
+//     };
+
+//     window.addEventListener("popstate", handlePopState);
+//     return () => window.removeEventListener("popstate", handlePopState);
+//   }, []);
+
+//   // Intercept internal link clicks (SPA behavior)
+//   useEffect(() => {
+//     const handleClick = (e: MouseEvent) => {
+//       const target = e.target as HTMLElement;
+//       const anchor = target.closest("a");
+
+//       if (!anchor) return;
+
+//       const href = anchor.getAttribute("href");
+
+//       if (href && href.startsWith("/")) {
+//         e.preventDefault();
+
+//         if (href !== currentPath) {
+//           window.history.pushState({}, "", href);
+//           setCurrentPath(href);
+//           window.scrollTo({ top: 0, behavior: "instant" });
+//         }
+//       }
+//     };
+
+//     document.addEventListener("click", handleClick);
+//     return () => document.removeEventListener("click", handleClick);
+//   }, [currentPath]);
+
+//   // ROUTES
+//   switch (currentPath) {
+//     case "/":
+//       return <HomePage />;
+
+//     case "/devils-tongue":
+//       return <DevilsTongue />;
+
+//     case "/science-research":
+//       return <ScienceResearch />;
+
+//     case "/privacy":
+//       return <Privacy />;
+
+//     case "/terms":
+//       return <Terms />;
+
+//     case "/join":
+//       return <Join />;
+
+//     default:
+//       return <HomePage />;
+//   }
+// }
+
+
+
+
+import { useState, useEffect } from "react";
+
+import HomePage from "./HomePage";
+import DevilsTongue from "./DevilsTongue";
+import ScienceResearch from "./ScienceResearch";
+import Privacy from "./Privacy";
+import Terms from "./Terms";
+import Join from "./formPage/Join";
 
 export default function Router() {
-  const [currentPath, setCurrentPath] = useState<string>(window.location.pathname);
+  const [currentPath, setCurrentPath] = useState<string>(
+    window.location.pathname
+  );
 
-  // Update path when using browser back/forward buttons
+  // ✅ SAFE: prevent crash during weird environments
+  const isJoinSubdomain =
+    typeof window !== "undefined" &&
+    window.location.hostname === "join.eattara.com";
+
   useEffect(() => {
-    const handlePopState = () => setCurrentPath(window.location.pathname);
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
+    const handlePopState = () => {
+      setCurrentPath(window.location.pathname);
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
   }, []);
 
-  // Intercept <a href="/..."> clicks to handle SPA navigation
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      const anchor = target.closest('a');
+      const anchor = target.closest("a");
 
-      if (anchor && anchor.getAttribute('href')?.startsWith('/')) {
+      if (!anchor) return;
+
+      const href = anchor.getAttribute("href");
+
+      if (href && href.startsWith("/")) {
         e.preventDefault();
-        const newPath = anchor.getAttribute('href') || '/';
-        if (newPath !== currentPath) {
-          window.history.pushState({}, '', newPath);
-          setCurrentPath(newPath);
-          window.scrollTo({ top: 0, behavior: 'instant' });
-        }
+
+        window.history.pushState({}, "", href);
+        setCurrentPath(href);
+        window.scrollTo({ top: 0, behavior: "instant" });
       }
     };
 
-    document.addEventListener('click', handleClick);
-    return () => document.removeEventListener('click', handleClick);
-  }, [currentPath]);
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+  }, []);
 
-  // ROUTES
+  // 🔥 SUBDOMAIN OVERRIDE (SAFE POSITION)
+  if (isJoinSubdomain) {
+    return <Join />;
+  }
+
   switch (currentPath) {
-    case '/devils-tongue':
+    case "/":
+      return <HomePage />;
+
+    case "/devils-tongue":
       return <DevilsTongue />;
-    case '/science-research':
+
+    case "/science-research":
       return <ScienceResearch />;
-    case '/privacy':
+
+    case "/privacy":
       return <Privacy />;
-    case '/terms':
+
+    case "/terms":
       return <Terms />;
+
+    case "/join":
+      return <Join />;
+
     default:
       return <HomePage />;
   }

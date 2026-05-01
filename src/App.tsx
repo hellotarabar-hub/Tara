@@ -1,5 +1,20 @@
-import Router from './Router';
-import {CookieConsent} from "./components/CookieConsent";
+// import Router from './Router';
+// import {CookieConsent} from "./components/CookieConsent";
+
+
+// export default function App() {
+//   return (
+//     <>
+//       {/* Global cookie consent banner */}
+//       <CookieConsent />
+
+//       {/* Router handles the rest of your pages */}
+//       <Router />
+//     </>
+//   );
+// }
+import Router from "./Router";
+import { CookieConsent } from "./components/CookieConsent";
 
 export default function App() {
   return (
@@ -7,7 +22,7 @@ export default function App() {
       {/* Global cookie consent banner */}
       <CookieConsent />
 
-      {/* Router handles the rest of your pages */}
+      {/* All routing is handled inside Router.tsx */}
       <Router />
     </>
   );

@@ -11,6 +11,7 @@ import WaitlistPopup from './components/WaitlistPopup';
 import ScrollProgress from './components/ScrollProgress';
 import CTA from './components/CTA';
 
+
 export default function HomePage() {
   const [showContent, setShowContent] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
