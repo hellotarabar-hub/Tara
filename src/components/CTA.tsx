@@ -400,9 +400,9 @@ export default function CTA() {
 
         <h2
           className="text-white mb-8 tracking-tight"
-          style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 200, lineHeight: 1.1 }}
+          style={{ fontSize: 'clamp(2rem, 5vw, 4rem)', fontWeight: 200, lineHeight: 1.1 }}
         >
-          Join The Movement
+NO BLOAT. LASTING FULLNESS.
         </h2>
 
         <p

@@ -336,7 +336,7 @@ export default function Mission() {
     {
       title: "Recover",
       heading:
-        "Magnesium, potassium, and zinc replenish electrolytes, reduce fatigue, and help your body recover efficiently.",
+        "Magnesium and potassium replenish electrolytes, reduce fatigue, and help your body recover efficiently.",
       image: "/3.png",
     },
   ];

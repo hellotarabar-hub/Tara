@@ -186,7 +186,7 @@ export default function Navbar() {
     { name: 'Benefits', id: 'benefits' },
         { name: 'Secret', id: 'secret' },
     { name: 'Function', id: 'function' },
-    { name: 'Nutrition', id: 'nutrition' },
+
     { name: 'Join', id: 'cta' },
   ];
 

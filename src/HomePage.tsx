@@ -42,7 +42,7 @@ export default function HomePage() {
             <Story onPopupTrigger={handlePopupTrigger} />
             <Secret />
             <Mission />
-            <Nutrition />
+  
             <CTA /> {/* Only one CTA now */}
           </main>
 

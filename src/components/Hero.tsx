@@ -641,7 +641,7 @@ export default function Hero() {
                   color: "rgba(92, 86, 59)"
                 }}
               >
-                20 g plant protein, gut-friendly prebiotic fiber, and recovery minerals — all in one clean, low-FODMAP bar.
+                15g plant protein, gut-friendly prebiotic fiber, and recovery minerals — all in one clean, low-FODMAP bar.
               </motion.p>
 
               {/* Button wrapper: centered on mobile, left on desktop */}
@@ -656,7 +656,7 @@ export default function Hero() {
                   className="px-10 py-4 bg-white text-black hover:bg-neutral-200 transition-all duration-300 rounded-full font-medium"
                   style={{ letterSpacing: "0.02em", fontSize: "0.9375rem" }}
                 >
-                  JOIN WAITLIST
+                GET EARLY ACCESS
                 </button>
               </motion.div>
             </motion.div>

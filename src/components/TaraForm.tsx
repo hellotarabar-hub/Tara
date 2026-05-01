@@ -64,7 +64,7 @@ function Field({ id, type = "text", placeholder, value, onChange, onEnter,
       <input
         id={id}
         type={type}
-        placeholder={`Enter your ${placeholder.toLowerCase()}`}
+        placeholder={` ${placeholder.toLowerCase()}`}
         autoComplete={autoComplete}
         inputMode={inputMode}
         value={value}
@@ -149,7 +149,9 @@ function SuccessScreen({ firstName }: { firstName: string }) {
           color: "rgba(255,255,255,0.45)", lineHeight: 1.75,
           marginBottom: 36, maxWidth: 300, margin: "0 auto 36px",
         }}>
-          We'll send you early access and your 15% discount before we launch.
+          You’ll get early access to the first drop — plus 15% off at launch.
+
+
         </p>
 
         {/* Spam tip card */}
@@ -178,6 +180,23 @@ function SuccessScreen({ firstName }: { firstName: string }) {
             </p>
           </div>
         </div>
+{/* Tagline under card */}
+<p
+  style={{
+    marginTop: 16,
+    fontSize: 13,
+    fontWeight: 400,
+    letterSpacing: "0.02em",
+    color: "rgba(255,255,255,0.45)",
+    textAlign: "center",
+  }}
+>
+  <span style={{ fontWeight: 500, color: "rgba(255,255,255,0.65)" }}>
+    No bloat.  Lasting fullness. Steady energy.
+  </span>{" "}
+
+</p>
+
 
       </div>
     </div>
@@ -321,16 +340,16 @@ export default function TaraLanding() {
               textTransform: "uppercase", color: "rgba(168,204,154,0.6)",
               marginBottom: 12,
             }}>
-              launching soon
+     A better protein bar starts here.
             </p>
             <h1 style={{
               fontFamily: "'Cormorant Garamond', serif",
-              fontSize: "clamp(38px,10vw,50px)",
+              fontSize: "clamp(38px,7vw,50px)",
               fontWeight: 700, lineHeight: 1.0,
               letterSpacing: "-0.01em",
               color: "#fff", marginBottom: 14,
             }}>
-              Be first to<br />
+             Meet TARA — a plant-based protein bar <br />
               <em style={{
                 fontStyle: "italic", fontWeight: 500,
                 background: "linear-gradient(135deg, #a8cc9a, #72b560)",
@@ -338,15 +357,15 @@ export default function TaraLanding() {
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
               }}>
-                try TARA.
+          built for digestion and lasting fullness.
               </em>
             </h1>
             <p style={{
               fontSize: 14, fontWeight: 300,
               color: "rgba(255,255,255,0.8)", lineHeight: 1.7,
             }}>
-              Join the list for launch updates and a{" "}
-              <span style={{ color: "rgba(128,204,154)", fontWeight: 400 }}>15% welcome discount</span>.
+             Get early access to the first batch {" "}
+              <span style={{ color: "rgba(128,204,154)", fontWeight: 400 }}> and 15% off at launch</span>.
             </p>
           </div>
 
@@ -408,7 +427,7 @@ export default function TaraLanding() {
               {status === "loading" ? (
                 <span style={{ opacity: 0.8 }}>Joining…</span>
               ) : (
-                <>Subscribe for early access <ArrowIcon /></>
+                <>Get early access <ArrowIcon /></>
               )}
             </button>
 
