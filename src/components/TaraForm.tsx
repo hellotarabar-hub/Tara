@@ -149,9 +149,7 @@ function SuccessScreen({ firstName }: { firstName: string }) {
           color: "rgba(255,255,255,0.45)", lineHeight: 1.75,
           marginBottom: 36, maxWidth: 300, margin: "0 auto 36px",
         }}>
-          You’ll get early access to the first drop — plus 15% off at launch.
-
-
+          We'll send you early access and your 15% discount before we launch.
         </p>
 
         {/* Spam tip card */}
@@ -180,23 +178,6 @@ function SuccessScreen({ firstName }: { firstName: string }) {
             </p>
           </div>
         </div>
-{/* Tagline under card */}
-<p
-  style={{
-    marginTop: 16,
-    fontSize: 13,
-    fontWeight: 400,
-    letterSpacing: "0.02em",
-    color: "rgba(255,255,255,0.45)",
-    textAlign: "center",
-  }}
->
-  <span style={{ fontWeight: 500, color: "rgba(255,255,255,0.65)" }}>
-    No bloat.  Lasting fullness. Steady energy.
-  </span>{" "}
-
-</p>
-
 
       </div>
     </div>
@@ -340,16 +321,16 @@ export default function TaraLanding() {
               textTransform: "uppercase", color: "rgba(168,204,154,0.6)",
               marginBottom: 12,
             }}>
-     A better protein bar starts here.
+              launching soon
             </p>
             <h1 style={{
               fontFamily: "'Cormorant Garamond', serif",
-              fontSize: "clamp(38px,7vw,50px)",
+              fontSize: "clamp(38px,10vw,50px)",
               fontWeight: 700, lineHeight: 1.0,
               letterSpacing: "-0.01em",
               color: "#fff", marginBottom: 14,
             }}>
-             Meet TARA — a plant-based protein bar <br />
+              Be the first to<br />
               <em style={{
                 fontStyle: "italic", fontWeight: 500,
                 background: "linear-gradient(135deg, #a8cc9a, #72b560)",
@@ -357,15 +338,15 @@ export default function TaraLanding() {
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
               }}>
-          built for digestion and lasting fullness.
+                try TARA.
               </em>
             </h1>
             <p style={{
               fontSize: 14, fontWeight: 300,
-              color: "rgba(255,255,255,0.8)", lineHeight: 1.7,
+              color: "rgba(255,255,255,0.38)", lineHeight: 1.7,
             }}>
-             Get early access to the first batch {" "}
-              <span style={{ color: "rgba(128,204,154)", fontWeight: 400 }}> and 15% off at launch</span>.
+              Get early access to the first batch and{" "}
+              <span style={{ color: "rgba(168,204,154,0.7)", fontWeight: 400 }}><br></br><b>15% off at launch</b></span>.
             </p>
           </div>
 
@@ -433,7 +414,7 @@ export default function TaraLanding() {
 
             <p style={{
               textAlign: "center", fontSize: 11, fontWeight: 300,
-              color: "rgba(255,255,255,0.8)", letterSpacing: "0.01em",
+              color: "rgba(255,255,255,0.7)", letterSpacing: "0.01em",
             }}>
               No spam. Unsubscribe anytime.
             </p>
@@ -444,3 +425,10 @@ export default function TaraLanding() {
     </>
   );
 }
+
+
+
+
+
+
+

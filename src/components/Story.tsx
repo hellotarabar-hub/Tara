@@ -192,6 +192,9 @@
 // }
 
 
+
+
+
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { useRef, useEffect } from "react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
@@ -200,13 +203,13 @@ interface StoryProps {
   onPopupTrigger: () => void;
 }
 
-// Clean claims data
+// Clean claims (list only)
 const cleanClaims = [
-  "No artificial flavors, sweeteners, or preservatives",
-  "No fillers or seed oils",
-  "No sugar alcohols",
   "No dairy or soy",
-  "No bloat. No crash. No compromise.",
+  "No sugar alcohols (erythritol, maltitol)",
+  "No IMO",
+  "No seed oils or fillers",
+  "No artificial flavors, sweeteners, or preservatives"
 ];
 
 export default function Story({ onPopupTrigger }: StoryProps) {
@@ -234,18 +237,12 @@ export default function Story({ onPopupTrigger }: StoryProps) {
     <section
       id="benefits"
       ref={ref}
-      className="
-        relative
-        bg-neutral-50
-        overflow-hidden
-        py-20
-        px-6 lg:px-12
-      "
+      className="relative bg-neutral-50 overflow-hidden py-20 px-6 lg:px-12"
     >
       <motion.div style={{ y: contentY }} className="max-w-7xl mx-auto w-full">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
 
-          {/* LEFT TEXT SIDE */}
+          {/* LEFT TEXT */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -281,7 +278,8 @@ export default function Story({ onPopupTrigger }: StoryProps) {
                   lineHeight: 1.8,
                 }}
               >
-                Most bars rely on dairy isolates, sugar alcohols, fast-fermenting fibers, and certain syrups that can cause heaviness and bloating.
+                Most bars rely on dairy isolates, sugar alcohols, fast-fermenting
+                fibers, and certain syrups that can cause heaviness and bloating.
               </p>
 
               <p
@@ -292,10 +290,11 @@ export default function Story({ onPopupTrigger }: StoryProps) {
                   lineHeight: 1.8,
                 }}
               >
-                TARA skips the junk — delivering real performance nutrition that keeps you light and satisfied.
+                TARA skips the junk — delivering real performance nutrition that
+                keeps you light and satisfied.
               </p>
 
-              {/* Clean claims block */}
+              {/* CLEAN CLAIMS LIST */}
               <div className="space-y-3 sm:space-y-4 mt-6">
                 {cleanClaims.map((item, index) => (
                   <div key={index} className="flex items-start gap-3">
@@ -309,17 +308,23 @@ export default function Story({ onPopupTrigger }: StoryProps) {
                         lineHeight: 1.7,
                       }}
                     >
-                      {item === "No bloat. No crash. No compromise." ? (
-                        <span style={{ fontWeight: 500, color: "#111" }}>
-                          {item}
-                        </span>
-                      ) : (
-                        item
-                      )}
+                      {item}
                     </p>
                   </div>
                 ))}
               </div>
+
+              {/* STRONG STATEMENT (NO BULLET) */}
+              <p
+                className="mt-6 text-neutral-900"
+                style={{
+                  fontSize: "clamp(1rem, 2vw, 1.25rem)",
+                  fontWeight: 300,
+                  letterSpacing: "0.02em",
+                }}
+              >
+                No bloat. No crash. No compromise.
+              </p>
             </motion.div>
           </motion.div>
 
