@@ -209,7 +209,7 @@ const cleanClaims = [
   "No sugar alcohols (erythritol, maltitol)",
   "No IMO",
   "No seed oils or fillers",
-  "No artificial flavors, sweeteners, or preservatives"
+  "No artificial flavors, sweeteners, or preservatives" 
 ];
 
 export default function Story({ onPopupTrigger }: StoryProps) {

@@ -468,7 +468,7 @@ NO BLOAT. LASTING FULLNESS.
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-6">
           <div className="flex flex-col sm:flex-row items-center justify-between text-white/40 gap-4 text-xs tracking-wide">
             
-            <p style={{ letterSpacing: '0.1em' }}>© 2025 TARA Nutrition, LLC</p>
+            <p style={{ letterSpacing: '0.1em' }}>© 2026 TARA Nutrition, LLC</p>
 
             <div className="flex items-center gap-8">
               {/* Privacy & Terms */}
