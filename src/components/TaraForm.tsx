@@ -239,11 +239,22 @@ export default function TaraLanding() {
         document.body.appendChild(script);
       });
 
-      setStatus("success");
+      // setStatus("success");
+      // Fire Meta Pixel Lead event
+if (typeof window !== "undefined" && (window as any).fbq) {
+  (window as any).fbq("track", "Lead");
+}
+
+setStatus("success");
     } catch {
       // Even on network error we show success — Mailchimp often succeeds
       // but the callback fires before we can catch it cleanly
-      setStatus("success");
+      // setStatus("success");
+      if (typeof window !== "undefined" && (window as any).fbq) {
+  (window as any).fbq("track", "Lead");
+}
+
+setStatus("success");
     }
   }, [firstName, email]);
 
