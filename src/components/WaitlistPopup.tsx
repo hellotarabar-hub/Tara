@@ -715,8 +715,8 @@
 
 
 
-
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
+// import { motion, AnimatePresence } from 'motion/react';
 import { useState, useEffect } from 'react';
 import { X, ArrowRight } from 'lucide-react';
 
@@ -764,44 +764,98 @@ export default function WaitlistPopup({ isOpen, onClose }: WaitlistPopupProps) {
     }
     onClose();
   };
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setError('');
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    setError('Please enter a valid email');
+    return;
+  }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setError('Please enter a valid email');
-      return;
+  try {
+    setLoading(true);
+
+    await new Promise<void>((resolve, reject) => {
+      const cbName = `mc_cb_${Date.now()}`;
+      const timeout = setTimeout(() => reject(new Error("timeout")), 8000);
+
+      (window as any)[cbName] = () => {
+        clearTimeout(timeout);
+        delete (window as any)[cbName];
+        resolve();
+      };
+
+      const url =
+        "https://us15.list-manage.com/subscribe/post-json?u=55288db69ea3107690efe06f6&id=9d24d91277&c=" +
+        cbName +
+        `&EMAIL=${encodeURIComponent(email)}&_=${Date.now()}`;
+
+      const script = document.createElement("script");
+      script.src = url;
+      script.onerror = () => reject(new Error("script error"));
+
+      document.body.appendChild(script);
+    });
+
+    // ✅ save locally
+    localStorage.setItem("waitlistEmail", email);
+
+    // ✅ FIRE META PIXEL LEAD EVENT
+    if (typeof window !== "undefined" && (window as any).fbq) {
+      (window as any).fbq("track", "Lead");
     }
 
-    try {
-      setLoading(true);
+    setSubmitted(true);
 
-      // 🔥 CALL YOUR BACKEND HERE (recommended)
-      const res = await fetch('/api/waitlist', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
+    setTimeout(() => {
+      handleClose();
+    }, 1500);
 
-      if (!res.ok) throw new Error('Failed');
+  } catch {
+    setError("Something went wrong. Try again.");
+  } finally {
+    setLoading(false);
+  }
+};
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setError('');
 
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('waitlistEmail', email);
-      }
+  //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  //   if (!emailRegex.test(email)) {
+  //     setError('Please enter a valid email');
+  //     return;
+  //   }
 
-      setSubmitted(true);
+  //   try {
+  //     setLoading(true);
 
-      setTimeout(() => {
-        handleClose();
-      }, 1500);
-    } catch (err) {
-      setError('Something went wrong. Try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
+  //     // 🔥 CALL YOUR BACKEND HERE (recommended)
+  //     const res = await fetch('/api/waitlist', {
+  //       method: 'POST',
+  //       headers: { 'Content-Type': 'application/json' },
+  //       body: JSON.stringify({ email }),
+  //     });
+
+  //     if (!res.ok) throw new Error('Failed');
+
+  //     if (typeof window !== 'undefined') {
+  //       localStorage.setItem('waitlistEmail', email);
+  //     }
+
+  //     setSubmitted(true);
+
+  //     setTimeout(() => {
+  //       handleClose();
+  //     }, 1500);
+  //   } catch (err) {
+  //     setError('Something went wrong. Try again.');
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   if (!visible) return null;
 
@@ -872,7 +926,7 @@ export default function WaitlistPopup({ isOpen, onClose }: WaitlistPopupProps) {
                   Welcome to TARA
                 </h3>
                 <p className="text-neutral-600">
-                  Thank you for joining our waitlist!
+                 YOU'RE ON THE LIST
                 </p>
               </motion.div>
             ) : (
@@ -884,11 +938,10 @@ export default function WaitlistPopup({ isOpen, onClose }: WaitlistPopupProps) {
                   className="text-center mb-8"
                 >
                   <h3 className="text-neutral-900 mb-4 text-2xl font-light">
-                    Join Our Waitlist
+                  Be the first to try TARA.
                   </h3>
                   <p className="text-neutral-600 max-w-md mx-auto">
-                    Be the first to experience TARA. Get exclusive early access and special launch offers.
-                  </p>
+                        Get early access to the first batch and 15% off at launch.                  </p>
                 </motion.div>
 
                 {/* Form */}
