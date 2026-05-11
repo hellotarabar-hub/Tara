@@ -205,11 +205,11 @@ interface StoryProps {
 
 // Clean claims (list only)
 const cleanClaims = [
-  "No dairy or soy",
   "No sugar alcohols (erythritol, maltitol)",
-  "No IMO",
-  "No seed oils or fillers",
-  "No artificial flavors, sweeteners, or preservatives" 
+  "No IMO or high-FODMAP fibers (chicory root fiber)",
+  "No artificial or low-calorie sweeteners (allulose, sucralose, aspartame)",
+  "No palm or seed oils (canola, soybean, sunflower)",
+  "No dairy, soy, or gluten"
 ];
 
 export default function Story({ onPopupTrigger }: StoryProps) {
@@ -270,17 +270,6 @@ export default function Story({ onPopupTrigger }: StoryProps) {
               transition={{ duration: 0.9, delay: 0.6 }}
               className="space-y-6"
             >
-              <p
-                className="text-neutral-600 tracking-wide leading-relaxed max-w-4xl"
-                style={{
-                  fontSize: "clamp(1rem, 2vw, 1.25rem)",
-                  fontWeight: 300,
-                  lineHeight: 1.8,
-                }}
-              >
-                Most bars rely on dairy isolates, sugar alcohols, fast-fermenting
-                fibers, and certain syrups that can cause heaviness and bloating.
-              </p>
 
               <p
                 className="text-neutral-600 tracking-wide leading-relaxed max-w-4xl"
@@ -290,15 +279,14 @@ export default function Story({ onPopupTrigger }: StoryProps) {
                   lineHeight: 1.8,
                 }}
               >
-                TARA skips the junk — delivering real performance nutrition that
-                keeps you light and satisfied.
+               Most bars are hard on digestion. TARA isn't.
               </p>
 
               {/* CLEAN CLAIMS LIST */}
               <div className="space-y-3 sm:space-y-4 mt-6">
                 {cleanClaims.map((item, index) => (
                   <div key={index} className="flex items-start gap-3">
-                    <div className="w-1 h-1 bg-neutral-400 rounded-full mt-2" />
+                    <div className="w-1 h-1 bg-neutral-400 rounded-full mt-3" />
 
                     <p
                       className="text-neutral-600 leading-relaxed"

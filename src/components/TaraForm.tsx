@@ -1,3 +1,603 @@
+// import React, { useState, useId, useCallback, useRef } from "react";
+
+// // ─── Mailchimp config ─────────────────────────────────────────────────────────
+// const MAILCHIMP_ACTION =
+//   "https://us15.list-manage.com/subscribe/post-json?u=55288db69ea3107690efe06f6&id=9d24d91277&c=?";
+// const MAILCHIMP_BOT_FIELD = "b_55288db69ea3107690efe06f6_9d24d91277";
+
+// // ─────────────────────────────────────────────────────────────────────────────
+
+// type Status = "idle" | "loading" | "success" | "error";
+
+// // ── Icons ────────────────────────────────────────────────────────────────────
+// const LeafIcon = () => (
+//   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
+//     <path
+//       d="M8 1.5C8 1.5 3 4.5 3 9C3 11.5 5.2 13.5 8 13.5C10.8 13.5 13 11.5 13 9C13 4.5 8 1.5 8 1.5Z"
+//       stroke="rgba(168,204,154,0.85)"
+//       strokeWidth="1.1"
+//     />
+//     <path
+//       d="M8 6V13"
+//       stroke="rgba(168,204,154,0.6)"
+//       strokeWidth="1.1"
+//       strokeLinecap="round"
+//     />
+//   </svg>
+// );
+
+// const CheckIcon = () => (
+//   <svg width="22" height="18" viewBox="0 0 28 22" fill="none" aria-hidden>
+//     <path
+//       d="M2 11L10 19L26 3"
+//       stroke="#a8cc9a"
+//       strokeWidth="2.5"
+//       strokeLinecap="round"
+//       strokeLinejoin="round"
+//     />
+//   </svg>
+// );
+
+// const ArrowIcon = () => (
+//   <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden>
+//     <path
+//       d="M3 8H13M13 8L9 4M13 8L9 12"
+//       stroke="#0e1a10"
+//       strokeWidth="1.6"
+//       strokeLinecap="round"
+//       strokeLinejoin="round"
+//     />
+//   </svg>
+// );
+
+// const InboxIcon = () => (
+//   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+//     <rect x="2" y="4" width="20" height="16" rx="3" stroke="rgba(168,204,154,0.6)" strokeWidth="1.3" />
+//     <path d="M2 9L10.5 14C11.4 14.6 12.6 14.6 13.5 14L22 9" stroke="rgba(168,204,154,0.6)" strokeWidth="1.3" />
+//   </svg>
+// );
+
+// // ── Input Field ───────────────────────────────────────────────────────────────
+// function Field({
+//   id,
+//   type = "text",
+//   placeholder,
+//   value,
+//   onChange,
+//   onEnter,
+//   autoComplete,
+//   inputMode,
+//   hasError,
+//   errorMessage,
+// }: {
+//   id: string;
+//   type?: string;
+//   placeholder: string;
+//   value: string;
+//   onChange: (v: string) => void;
+//   onEnter?: () => void;
+//   autoComplete?: string;
+//   inputMode?: React.HTMLAttributes<HTMLInputElement>["inputMode"];
+//   hasError: boolean;
+//   errorMessage: string;
+// }) {
+//   const [focused, setFocused] = useState(false);
+
+//   return (
+//     <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+//       <label
+//         htmlFor={id}
+//         style={{
+//           fontSize: 10,
+//           fontWeight: 500,
+//           letterSpacing: "0.12em",
+//           textTransform: "uppercase",
+//           color: "rgba(255,255,255,0.35)",
+//         }}
+//       >
+//         {placeholder}
+//       </label>
+
+//       <input
+//         id={id}
+//         type={type}
+//         placeholder={` ${placeholder.toLowerCase()}`}
+//         autoComplete={autoComplete}
+//         inputMode={inputMode}
+//         value={value}
+//         onChange={(e) => onChange(e.target.value)}
+//         onFocus={() => setFocused(true)}
+//         onBlur={() => setFocused(false)}
+//         onKeyDown={(e) => e.key === "Enter" && onEnter?.()}
+//         aria-invalid={hasError}
+//         style={{
+//           height: 50,
+//           background: hasError
+//             ? "rgba(200,80,80,0.08)"
+//             : focused
+//             ? "rgba(255,255,255,0.09)"
+//             : "rgba(255,255,255,0.05)",
+//           border: `1px solid ${
+//             hasError
+//               ? "rgba(220,100,100,0.55)"
+//               : focused
+//               ? "rgba(168,204,154,0.45)"
+//               : "rgba(255,255,255,0.08)"
+//           }`,
+//           borderRadius: 12,
+//           padding: "0 16px",
+//           fontSize: 15,
+//           fontWeight: 300,
+//           color: "#fff",
+//           outline: "none",
+//           width: "100%",
+//         }}
+//       />
+
+//       {hasError && (
+//         <span style={{ fontSize: 11, color: "rgba(230,120,120,0.9)" }}>
+//           {errorMessage}
+//         </span>
+//       )}
+//     </div>
+//   );
+// }
+
+// // ── Success Screen ────────────────────────────────────────────────────────────
+// function SuccessScreen({ firstName }: { firstName: string }) {
+//   const first = firstName.trim().split(" ")[0];
+
+//   return (
+//     <div style={{
+//       minHeight: "100vh",
+//       display: "flex",
+//       alignItems: "center",
+//       justifyContent: "center",
+//       background: "radial-gradient(ellipse 90% 70% at 50% 0%, #183320 0%, #0a1209 100%)",
+//       fontFamily: "'DM Sans', sans-serif",
+//     }}>
+//       <div style={{ textAlign: "center", maxWidth: 400 }}>
+
+//         <div style={{
+//           width: 68,
+//           height: 68,
+//           borderRadius: "50%",
+//           background: "linear-gradient(135deg, #2a5430, #162b19)",
+//           display: "flex",
+//           alignItems: "center",
+//           justifyContent: "center",
+//           margin: "0 auto 24px",
+//         }}>
+//           <CheckIcon />
+//         </div>
+
+//         <h2 style={{ color: "#fff" }}>
+//           Welcome, {first}
+//         </h2>
+
+//         <p style={{ color: "rgba(255,255,255,0.6)" }}>
+//           You're on the list.
+//         </p>
+
+//         <div style={{ marginTop: 20, color: "rgba(255,255,255,0.4)", fontSize: 12 }}>
+//           Check spam folder if you don’t see email.
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// // ── MAIN COMPONENT ───────────────────────────────────────────────────────────
+// export default function TaraForm() {
+//   const nameId = useId();
+//   const emailId = useId();
+//   const scriptRef = useRef<HTMLScriptElement | null>(null);
+
+//   const [firstName, setFirstName] = useState("");
+//   const [email, setEmail] = useState("");
+//   const [status, setStatus] = useState<Status>("idle");
+//   const [nameError, setNameError] = useState(false);
+//   const [emailError, setEmailError] = useState(false);
+
+//   const isValidEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+
+//   const handleSubmit = useCallback(async (e: React.FormEvent) => {
+//     e.preventDefault();
+
+//     if (!firstName.trim()) return setNameError(true);
+//     if (!isValidEmail(email)) return setEmailError(true);
+
+//     setStatus("loading");
+
+//     try {
+//       await new Promise<void>((resolve, reject) => {
+//         const cbName = `mc_${Date.now()}`;
+//         const timeout = setTimeout(() => reject(), 8000);
+
+//         (window as any)[cbName] = () => {
+//           clearTimeout(timeout);
+//           resolve();
+//         };
+
+//         const url =
+//           `${MAILCHIMP_ACTION.replace("c=?", `c=${cbName}`)}` +
+//           `&EMAIL=${encodeURIComponent(email)}` +
+//           `&FNAME=${encodeURIComponent(firstName)}` +
+//           `&${MAILCHIMP_BOT_FIELD}=&_=${Date.now()}`;
+
+//         const script = document.createElement("script");
+//         script.src = url;
+//         script.onerror = reject;
+
+//         scriptRef.current = script;
+//         document.body.appendChild(script);
+//       });
+
+//       if (typeof window !== "undefined" && (window as any).fbq) {
+//         (window as any).fbq("track", "Lead");
+//       }
+
+//       setStatus("success");
+//     } catch {
+//       setStatus("success");
+//     }
+//   }, [firstName, email]);
+
+//   if (status === "success") {
+//     return <SuccessScreen firstName={firstName} />;
+//   }
+
+//   return (
+//     <div style={{ padding: 40, textAlign: "center" }}>
+//       <form onSubmit={handleSubmit}>
+//         <Field
+//           id={nameId}
+//           placeholder="First name"
+//           value={firstName}
+//           onChange={setFirstName}
+//           hasError={nameError}
+//           errorMessage="Enter name"
+//         />
+
+//         <Field
+//           id={emailId}
+//           placeholder="Email"
+//           value={email}
+//           onChange={setEmail}
+//           hasError={emailError}
+//           errorMessage="Enter valid email"
+//         />
+
+//         <button type="submit">
+//           Get Access <ArrowIcon />
+//         </button>
+//       </form>
+//     </div>
+//   );
+// }
+
+// import { useState, useId, useCallback, useRef, useEffect } from "react";
+
+// // ─── Mailchimp config ─────────────────────────────────────────────────────────
+// const MAILCHIMP_ACTION =
+//   "https://us15.list-manage.com/subscribe/post-json?u=55288db69ea3107690efe06f6&id=9d24d91277&c=?";
+// const MAILCHIMP_BOT_FIELD =
+//   "b_55288db69ea3107690efe06f6_9d24d91277";
+
+// type Status = "idle" | "loading" | "success" | "error";
+
+// type UtmData = {
+//   utm_source?: string;
+//   utm_medium?: string;
+//   utm_campaign?: string;
+//   utm_content?: string;
+// };
+
+// // ── Icons ─────────────────────────────────────────────────────────────────────
+// const LeafIcon = () => (
+//   <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+//     <path
+//       d="M8 1.5C8 1.5 3 4.5 3 9C3 11.5 5.2 13.5 8 13.5C10.8 13.5 13 11.5 13 9C13 4.5 8 1.5 8 1.5Z"
+//       stroke="rgba(168,204,154,0.85)"
+//       strokeWidth="1.1"
+//     />
+//     <path
+//       d="M8 6V13"
+//       stroke="rgba(168,204,154,0.6)"
+//       strokeWidth="1.1"
+//       strokeLinecap="round"
+//     />
+//   </svg>
+// );
+
+// const CheckIcon = () => (
+//   <svg width="22" height="18" viewBox="0 0 28 22" fill="none">
+//     <path
+//       d="M2 11L10 19L26 3"
+//       stroke="#a8cc9a"
+//       strokeWidth="2.5"
+//       strokeLinecap="round"
+//       strokeLinejoin="round"
+//     />
+//   </svg>
+// );
+
+// const ArrowIcon = () => (
+//   <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+//     <path
+//       d="M3 8H13M13 8L9 4M13 8L9 12"
+//       stroke="#0e1a10"
+//       strokeWidth="1.6"
+//       strokeLinecap="round"
+//       strokeLinejoin="round"
+//     />
+//   </svg>
+// );
+
+// const InboxIcon = () => (
+//   <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+//     <rect
+//       x="2"
+//       y="4"
+//       width="20"
+//       height="16"
+//       rx="3"
+//       stroke="rgba(168,204,154,0.6)"
+//       strokeWidth="1.3"
+//     />
+//     <path
+//       d="M2 9L10.5 14C11.4 14.6 12.6 14.6 13.5 14L22 9"
+//       stroke="rgba(168,204,154,0.6)"
+//       strokeWidth="1.3"
+//     />
+//   </svg>
+// );
+
+// // ── Field ─────────────────────────────────────────────────────────────────────
+// function Field({
+//   id,
+//   type = "text",
+//   placeholder,
+//   value,
+//   onChange,
+//   onEnter,
+//   autoComplete,
+//   hasError,
+//   errorMessage,
+// }: any) {
+//   const [focused, setFocused] = useState(false);
+
+//   return (
+//     <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+//       <label
+//         htmlFor={id}
+//         style={{
+//           fontSize: 10,
+//           fontWeight: 500,
+//           letterSpacing: "0.12em",
+//           textTransform: "uppercase",
+//           color: "rgba(255,255,255,0.35)",
+//         }}
+//       >
+//         {placeholder}
+//       </label>
+
+//       <input
+//         id={id}
+//         type={type}
+//         placeholder={` ${placeholder.toLowerCase()}`}
+//         autoComplete={autoComplete}
+//         value={value}
+//         onChange={(e) => onChange(e.target.value)}
+//         onFocus={() => setFocused(true)}
+//         onBlur={() => setFocused(false)}
+//         onKeyDown={(e) => e.key === "Enter" && onEnter?.()}
+//         style={{
+//           height: 50,
+//           background: hasError
+//             ? "rgba(200,80,80,0.08)"
+//             : focused
+//             ? "rgba(255,255,255,0.09)"
+//             : "rgba(255,255,255,0.05)",
+//           border: `1px solid ${
+//             hasError
+//               ? "rgba(220,100,100,0.55)"
+//               : focused
+//               ? "rgba(168,204,154,0.45)"
+//               : "rgba(255,255,255,0.08)"
+//           }`,
+//           borderRadius: 12,
+//           padding: "0 16px",
+//           fontSize: 15,
+//           color: "#fff",
+//           width: "100%",
+//           outline: "none",
+//         }}
+//       />
+
+//       {hasError && (
+//         <span style={{ fontSize: 11, color: "rgba(230,120,120,0.9)" }}>
+//           {errorMessage}
+//         </span>
+//       )}
+//     </div>
+//   );
+// }
+
+// // ── Success screen ────────────────────────────────────────────────────────────
+// function SuccessScreen({ firstName }: any) {
+//   const first = firstName?.trim()?.split(" ")[0];
+
+//   return (
+//     <div
+//       style={{
+//         minHeight: "100vh",
+//         display: "flex",
+//         alignItems: "center",
+//         justifyContent: "center",
+//         background:
+//           "radial-gradient(ellipse 90% 70% at 50% 0%, #183320 0%, #0a1209 100%)",
+//         fontFamily: "'DM Sans', sans-serif",
+//       }}
+//     >
+//       <div style={{ textAlign: "center" }}>
+//         <CheckIcon />
+//         <h2 style={{ color: "#fff", marginTop: 20 }}>
+//           Welcome, {first}
+//         </h2>
+//       </div>
+//     </div>
+//   );
+// }
+
+// // ── MAIN COMPONENT ───────────────────────────────────────────────────────────
+// export default function TaraForm() {
+//   const nameId = useId();
+//   const emailId = useId();
+
+//   const [firstName, setFirstName] = useState("");
+//   const [email, setEmail] = useState("");
+//   const [status, setStatus] = useState<Status>("idle");
+//   const [nameError, setNameError] = useState(false);
+//   const [emailError, setEmailError] = useState(false);
+//   const scriptRef = useRef<HTMLScriptElement | null>(null);
+
+//   const isValidEmail = (v: string) =>
+//     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+
+//   const handleSubmit = useCallback(
+//     async (e: React.FormEvent) => {
+//       e.preventDefault();
+
+//       if (!firstName.trim()) {
+//         setNameError(true);
+//         return;
+//       }
+
+//       if (!isValidEmail(email)) {
+//         setEmailError(true);
+//         return;
+//       }
+
+
+// const script = document.createElement("script");
+//   setStatus("loading");
+
+// console.log("SUBMITTING");
+// console.log("LOCAL STORAGE:", localStorage.getItem("tara_utm"));
+
+// try {
+//         const cbName = `mc_cb_${Date.now()}`;
+
+//         await new Promise<void>((resolve) => {
+//           (window as any)[cbName] = () => {
+//             resolve();
+//             delete (window as any)[cbName];
+//           };
+
+// const stored = JSON.parse(
+//   localStorage.getItem("tara_utm") || "{}"
+// );
+
+// const utm = stored.last_touch || {};
+
+// const url =
+//   MAILCHIMP_ACTION.replace("c=?", `c=${cbName}`) +
+//   `&EMAIL=${encodeURIComponent(email)}` +
+//   `&FNAME=${encodeURIComponent(firstName)}` +
+
+//   `&MERGE7=${encodeURIComponent(utm.utm_source || "")}` +
+//   `&MERGE8=${encodeURIComponent(utm.utm_medium || "")}` +
+//   `&MERGE9=${encodeURIComponent(utm.utm_campaign || "")}` +
+//   `&MERGE10=${encodeURIComponent(utm.utm_content || "")}` +
+
+//   `&${MAILCHIMP_BOT_FIELD}=` +
+//   `&_=${Date.now()}`;
+
+
+//   console.log("MAILCHIMP URL:", url);
+
+//           const script = document.createElement("script");
+//           script.src = url;
+
+//           script.onerror = () => resolve();
+
+//           scriptRef.current = script;
+//           document.body.appendChild(script);
+
+//           // safety timeout so it NEVER freezes UI
+//           setTimeout(() => resolve(), 6000);
+//         });
+
+//         setStatus("success");
+//       } catch {
+//         setStatus("success");
+//       }
+//     },
+//     [firstName, email]
+//   );
+
+//   if (status === "success") {
+//     return <SuccessScreen firstName={firstName} />;
+//   }
+
+//   // ── YOUR ORIGINAL UI (UNCHANGED STRUCTURE) ─────────────────────────────────
+//   return (
+//     <>
+//       <div
+//         style={{
+//           minHeight: "100vh",
+//           display: "flex",
+//           alignItems: "center",
+//           justifyContent: "center",
+//           background:
+//             "radial-gradient(ellipse 90% 70% at 50% 0%, #183320 0%, #0a1209 100%)",
+//         }}
+//       >
+//         <div style={{ width: 400 }}>
+//           <form onSubmit={handleSubmit}>
+//             <Field
+//               id={nameId}
+//               placeholder="First name"
+//               value={firstName}
+//               onChange={setFirstName}
+//               hasError={nameError}
+//               errorMessage="Enter name"
+//             />
+
+//             <Field
+//               id={emailId}
+//               type="email"
+//               placeholder="Email"
+//               value={email}
+//               onChange={setEmail}
+//               hasError={emailError}
+//               errorMessage="Enter valid email"
+//             />
+
+//             <button
+//               type="submit"
+//               style={{
+//                 marginTop: 20,
+//                 width: "100%",
+//                 height: 52,
+//                 background: "#a8cc9a",
+//                 border: "none",
+//                 borderRadius: 12,
+//                 cursor: "pointer",
+//               }}
+//             >
+//               {status === "loading" ? "Joining..." : "Join"}
+//             </button>
+//           </form>
+//         </div>
+//       </div>
+//     </>
+//   );
+// }
+
+
+
 import { useState, useId, useCallback, useRef } from "react";
 
 // ─── Mailchimp config ─────────────────────────────────────────────────────────
@@ -199,64 +799,111 @@ export default function TaraLanding() {
 
   const isValidEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 
+
+
+
+
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    // Validate
-    let ok = true;
-    if (!firstName.trim()) { setNameError(true); ok = false; }
-    if (!isValidEmail(email.trim())) { setEmailError(true); ok = false; }
-    if (!ok) return;
+  let ok = true;
 
-    setStatus("loading");
+  if (!firstName.trim()) {
+    setNameError(true);
+    ok = false;
+  }
 
-    try {
-      // JSONP — Mailchimp's CORS-safe method
-      await new Promise<void>((resolve, reject) => {
-        const cbName = `mc_cb_${Date.now()}`;
-        const timeout = setTimeout(() => reject(new Error("timeout")), 8000);
+  if (!isValidEmail(email.trim())) {
+    setEmailError(true);
+    ok = false;
+  }
 
-        (window as Record<string, unknown>)[cbName] = () => {
-          clearTimeout(timeout);
-          delete (window as Record<string, unknown>)[cbName];
-          if (scriptRef.current) {
-            document.body.removeChild(scriptRef.current);
-            scriptRef.current = null;
-          }
+  if (!ok) return;
+
+  setStatus("loading");
+
+  try {
+    // ─── ALWAYS READ UTM DIRECTLY FROM URL ─────────────────────────────
+    const params = new URLSearchParams(window.location.search);
+
+    const utm = {
+      utm_source: params.get("utm_source") || "",
+      utm_medium: params.get("utm_medium") || "",
+      utm_campaign: params.get("utm_campaign") || "",
+      utm_content: params.get("utm_content") || "",
+    };
+
+    console.log("UTM CAPTURED:", utm);
+
+    const cbName = `mc_cb_${Date.now()}`;
+
+    await new Promise<void>((resolve, reject) => {
+      const timeout = setTimeout(() => {
+        cleanup();
+        reject(new Error("timeout"));
+      }, 10000);
+
+      const cleanup = () => {
+        clearTimeout(timeout);
+
+        delete (window as any)[cbName];
+
+        if (scriptRef.current) {
+          scriptRef.current.remove();
+          scriptRef.current = null;
+        }
+      };
+
+      (window as any)[cbName] = (response: any) => {
+        console.log("MAILCHIMP RESPONSE:", response);
+
+        cleanup();
+
+        // Mailchimp sometimes returns "error" in JSONP
+        if (response?.result === "error") {
+          reject(new Error(response?.msg || "Mailchimp error"));
+        } else {
           resolve();
-        };
+        }
+      };
 
-        const url = `${MAILCHIMP_ACTION.replace("c=?", `c=${cbName}`)}`
-          + `&EMAIL=${encodeURIComponent(email.trim())}`
-          + `&FNAME=${encodeURIComponent(firstName.trim())}`
-          + `&${MAILCHIMP_BOT_FIELD}=`
-          + `&_=${Date.now()}`;
+      const url =
+        "https://us15.list-manage.com/subscribe/post-json?u=55288db69ea3107690efe06f6&id=9d24d91277&c=" +
+        cbName +
+        `&EMAIL=${encodeURIComponent(email.trim())}` +
+        `&FNAME=${encodeURIComponent(firstName.trim())}` +
+        `&MERGE7=${encodeURIComponent(utm.utm_source)}` +
+        `&MERGE8=${encodeURIComponent(utm.utm_medium)}` +
+        `&MERGE9=${encodeURIComponent(utm.utm_campaign)}` +
+        `&MERGE10=${encodeURIComponent(utm.utm_content)}` +
+        `&${MAILCHIMP_BOT_FIELD}=` +
+        `&_=${Date.now()}`;
 
-        const script = document.createElement("script");
-        script.src = url;
-        script.onerror = () => { clearTimeout(timeout); reject(new Error("script error")); };
-        scriptRef.current = script;
-        document.body.appendChild(script);
-      });
+      console.log("MAILCHIMP URL:", url);
 
-      // setStatus("success");
-      // Fire Meta Pixel Lead event
-if (typeof window !== "undefined" && (window as any).fbq) {
-  (window as any).fbq("track", "Lead");
-}
+      const script = document.createElement("script");
+      script.src = url;
+      script.async = true;
 
-setStatus("success");
-    } catch {
-      // Even on network error we show success — Mailchimp often succeeds
-      // but the callback fires before we can catch it cleanly
-      // setStatus("success");
-      if (typeof window !== "undefined" && (window as any).fbq) {
-  (window as any).fbq("track", "Lead");
-}
+      script.onerror = () => {
+        cleanup();
+        reject(new Error("script error"));
+      };
 
-setStatus("success");
+      scriptRef.current = script;
+      document.body.appendChild(script);
+    });
+
+    if (typeof window !== "undefined" && (window as any).fbq) {
+      (window as any).fbq("track", "Lead");
     }
-  }, [firstName, email]);
+
+    setStatus("success");
+  } catch (err) {
+    console.error("SUBMIT ERROR:", err);
+    setStatus("error");
+  }
+}, [firstName, email]);
 
   if (status === "success") {
     return <SuccessScreen firstName={firstName} />;
@@ -349,16 +996,38 @@ setStatus("success");
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
               }}>
-                try TARA.
-              </em>
-            </h1>
-            <p style={{
+                try TARA — 
+                
+                <br />
+ </em>
+   </h1>
+              <em
+  style={{
+    fontFamily: "'Cormorant Garamond', serif",
+    fontStyle: "normal",
+    fontSize: "clamp(14px, 2.1vw, 18px)",
+    fontWeight: 300,
+    lineHeight: 1.25,
+    letterSpacing: "-0.02em",
+    color: "#fff",
+    marginBottom: 14,
+    display: "block",
+    opacity: 0.95,
+  }}
+>
+ Designed for digestion and lasting fullness. <br></br>  {" "}
+  <span style={{ color: "#fff", fontWeight: 300 }}><b></b></span> 
+</em>
+              
+             
+          
+            {/* <p style={{
               fontSize: 14, fontWeight: 300,
-              color: "rgba(255,255,255,0.38)", lineHeight: 1.7,
+              color: "#fff", lineHeight: 1.7,
             }}>
               Get early access to the first batch and{" "}
-              <span style={{ color: "rgba(168,204,154,0.7)", fontWeight: 400 }}><br></br><b>15% off at launch</b></span>.
-            </p>
+              <span style={{ color: "#fff", fontWeight: 200 }}><br></br><b>15% off at launch</b></span>.
+            </p> */}
           </div>
 
           {/* Divider */}
@@ -436,10 +1105,3 @@ setStatus("success");
     </>
   );
 }
-
-
-
-
-
-
-

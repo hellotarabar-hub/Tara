@@ -715,147 +715,481 @@
 
 
 
-import { motion, AnimatePresence } from 'framer-motion';
-// import { motion, AnimatePresence } from 'motion/react';
-import { useState, useEffect } from 'react';
-import { X, ArrowRight } from 'lucide-react';
+// import { motion, AnimatePresence } from 'framer-motion';
+// // import { motion, AnimatePresence } from 'motion/react';
+// import { useState, useEffect } from 'react';
+// import { X, ArrowRight } from 'lucide-react';
+
+// interface WaitlistPopupProps {
+//   isOpen: boolean;
+//   onClose: () => void;
+// }
+
+// export default function WaitlistPopup({ isOpen, onClose }: WaitlistPopupProps) {
+//   const [email, setEmail] = useState('');
+//   const [submitted, setSubmitted] = useState(false);
+//   const [visible, setVisible] = useState(false);
+//   const [loading, setLoading] = useState(false);
+//   const [error, setError] = useState('');
+
+//   // Handle visibility + localStorage safely
+//   useEffect(() => {
+//     if (typeof window === 'undefined') return;
+
+//     const submittedEmail = localStorage.getItem('waitlistEmail');
+//     const closedBefore = localStorage.getItem('waitlistClosed');
+
+//     if (submittedEmail || closedBefore) {
+//       setVisible(false);
+//     } else {
+//       setVisible(isOpen);
+//     }
+//   }, [isOpen]);
+
+//   // Lock scroll
+//   useEffect(() => {
+//     if (visible) {
+//       document.body.style.overflow = 'hidden';
+//     }
+
+//     return () => {
+//       document.body.style.overflow = 'unset';
+//     };
+//   }, [visible]);
+
+//   const handleClose = () => {
+//     setVisible(false);
+//     if (typeof window !== 'undefined') {
+//       localStorage.setItem('waitlistClosed', 'true');
+//     }
+//     onClose();
+//   };
+// const handleSubmit = async (e: React.FormEvent) => {
+//   e.preventDefault();
+//   setError('');
+
+//   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//   if (!emailRegex.test(email)) {
+//     setError('Please enter a valid email');
+//     return;
+//   }
+
+//   try {
+//     setLoading(true);
+
+//     await new Promise<void>((resolve, reject) => {
+//       const cbName = `mc_cb_${Date.now()}`;
+//       const timeout = setTimeout(() => reject(new Error("timeout")), 8000);
+
+//       (window as any)[cbName] = () => {
+//         clearTimeout(timeout);
+//         delete (window as any)[cbName];
+//         resolve();
+//       };
+
+//     const utm = JSON.parse(localStorage.getItem("utm") || "{}");
+
+// const url =
+//   "https://us15.list-manage.com/subscribe/post-json?u=55288db69ea3107690efe06f6&id=9d24d91277&c=" +
+//   cbName +
+//   `&EMAIL=${encodeURIComponent(email)}` +
+//   `&UTM_SOURCE=${encodeURIComponent(utm.utm_source || "")}` +
+//   `&UTM_MEDIUM=${encodeURIComponent(utm.utm_medium || "")}` +
+//   `&UTMCAMPGN=${encodeURIComponent(utm.utm_campaign || "")}` +
+//   `&UTMCONTENT=${encodeURIComponent(utm.utm_content || "")}` +
+//   `&_=${Date.now()}`;
+
+//       const script = document.createElement("script");
+//       script.src = url;
+//       script.onerror = () => reject(new Error("script error"));
+
+//       document.body.appendChild(script);
+//     });
+
+//     // ✅ save locally
+//     localStorage.setItem("waitlistEmail", email);
+
+//     // ✅ FIRE META PIXEL LEAD EVENT
+//     if (typeof window !== "undefined" && (window as any).fbq) {
+//       (window as any).fbq("track", "Lead");
+//     }
+
+//     setSubmitted(true);
+
+//     setTimeout(() => {
+//       handleClose();
+//     }, 1500);
+
+//   } catch {
+//     setError("Something went wrong. Try again.");
+//   } finally {
+//     setLoading(false);
+//   }
+// };
+//   // const handleSubmit = async (e: React.FormEvent) => {
+//   //   e.preventDefault();
+//   //   setError('');
+
+//   //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//   //   if (!emailRegex.test(email)) {
+//   //     setError('Please enter a valid email');
+//   //     return;
+//   //   }
+
+//   //   try {
+//   //     setLoading(true);
+
+//   //     // 🔥 CALL YOUR BACKEND HERE (recommended)
+//   //     const res = await fetch('/api/waitlist', {
+//   //       method: 'POST',
+//   //       headers: { 'Content-Type': 'application/json' },
+//   //       body: JSON.stringify({ email }),
+//   //     });
+
+//   //     if (!res.ok) throw new Error('Failed');
+
+//   //     if (typeof window !== 'undefined') {
+//   //       localStorage.setItem('waitlistEmail', email);
+//   //     }
+
+//   //     setSubmitted(true);
+
+//   //     setTimeout(() => {
+//   //       handleClose();
+//   //     }, 1500);
+//   //   } catch (err) {
+//   //     setError('Something went wrong. Try again.');
+//   //   } finally {
+//   //     setLoading(false);
+//   //   }
+//   // };
+
+//   if (!visible) return null;
+
+//   return (
+//     <AnimatePresence>
+//       {/* Overlay */}
+//       <motion.div
+//         key="overlay"
+//         initial={{ opacity: 0 }}
+//         animate={{ opacity: 1 }}
+//         exit={{ opacity: 0 }}
+//         transition={{ duration: 0.3 }}
+//         className="fixed inset-0 bg-neutral-900/60 backdrop-blur-sm z-50"
+//         onClick={(e) => {
+//           if (e.target === e.currentTarget) handleClose();
+//         }}
+//       />
+
+//       {/* Popup */}
+//       <motion.div
+//         key="popup"
+//         initial={{ opacity: 0, scale: 0.9, y: 20 }}
+//         animate={{ opacity: 1, scale: 1, y: 0 }}
+//         exit={{ opacity: 0, scale: 0.9, y: 20 }}
+//         transition={{ duration: 0.4 }}
+//         className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-lg mx-2"
+//       >
+//         <div className="bg-white shadow-2xl overflow-hidden relative">
+//           {/* Close button */}
+//           <button
+//             type="button"
+//             onClick={handleClose}
+//             className="absolute top-6 right-6 text-neutral-400 hover:text-neutral-900 transition-colors z-10"
+//             aria-label="Close popup"
+//           >
+//             <X size={24} />
+//           </button>
+
+//           <div className="p-12">
+//             {submitted ? (
+//               <motion.div
+//                 initial={{ opacity: 0, y: 10 }}
+//                 animate={{ opacity: 1, y: 0 }}
+//                 className="text-center py-8"
+//               >
+//                 <motion.div
+//                   initial={{ scale: 0 }}
+//                   animate={{ scale: 1 }}
+//                   transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
+//                   className="w-16 h-16 mx-auto mb-6 rounded-full bg-neutral-900 flex items-center justify-center"
+//                 >
+//                   <svg
+//                     className="w-8 h-8 text-white"
+//                     fill="none"
+//                     viewBox="0 0 24 24"
+//                     stroke="currentColor"
+//                   >
+//                     <path
+//                       strokeLinecap="round"
+//                       strokeLinejoin="round"
+//                       strokeWidth={2}
+//                       d="M5 13l4 4L19 7"
+//                     />
+//                   </svg>
+//                 </motion.div>
+
+//                 <h3 className="text-neutral-900 mb-3 text-xl font-light">
+//                   Welcome to TARA
+//                 </h3>
+//                 <p className="text-neutral-600">
+//                  YOU'RE ON THE LIST
+//                 </p>
+//               </motion.div>
+//             ) : (
+//               <>
+//                 {/* Header */}
+//                 <motion.div
+//                   initial={{ opacity: 0, y: 10 }}
+//                   animate={{ opacity: 1, y: 0 }}
+//                   className="text-center mb-8"
+//                 >
+//                   <h3 className="text-neutral-900 mb-4 text-2xl font-light">
+//                   Be the first to try TARA.
+//                   </h3>
+//                   <p className="text-neutral-600 max-w-md mx-auto">
+//                         Get early access to the first batch and 15% off at launch.                  </p>
+//                 </motion.div>
+
+//                 {/* Form */}
+//                 <form onSubmit={handleSubmit} className="space-y-6">
+//                   <div>
+//                     <label htmlFor="waitlist-email" className="sr-only">
+//                       Email
+//                     </label>
+
+//                     <input
+//                       type="email"
+//                       id="waitlist-email"
+//                       name="email"
+//                       value={email}
+//                       onChange={(e) => setEmail(e.target.value)}
+//                       placeholder="Enter your email"
+//                       autoComplete="email"
+//                       className="w-full px-6 py-4 bg-neutral-50 border border-neutral-200 text-neutral-900 placeholder-neutral-400 outline-none focus:border-neutral-400 transition-all"
+//                     />
+//                   </div>
+
+//                   {error && (
+//                     <p className="text-sm text-red-500 text-center">{error}</p>
+//                   )}
+
+//                   <button
+//                     type="submit"
+//                     disabled={loading}
+//                     className="w-full px-8 py-4 bg-neutral-900 text-white hover:bg-neutral-800 transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+//                     style={{ letterSpacing: '0.1em' }}
+//                   >
+//                     {loading ? 'JOINING...' : 'JOIN WAITLIST'}
+//                     {!loading && (
+//                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+//                     )}
+//                   </button>
+//                 </form>
+//               </>
+//             )}
+//           </div>
+//         </div>
+//       </motion.div>
+//     </AnimatePresence>
+//   );
+// }
+
+
+
+
+
+
+
+
+
+// const handleSubmit = async (e: React.FormEvent) => {
+//   e.preventDefault();
+//   setError("");
+
+//   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//   if (!emailRegex.test(email)) {
+//     setError("Please enter a valid email");
+//     return;
+//   }
+
+//   try {
+//     setLoading(true);
+
+//     const utm = JSON.parse(localStorage.getItem("utm") || "{}");
+
+//     await new Promise<void>((resolve, reject) => {
+//       const cbName = `mc_cb_${Date.now()}`;
+//       const timeout = setTimeout(() => reject(new Error("timeout")), 8000);
+
+//       (window as any)[cbName] = () => {
+//         clearTimeout(timeout);
+//         delete (window as any)[cbName];
+//         resolve();
+//       };
+
+//       const url =
+//         "https://us15.list-manage.com/subscribe/post-json?u=55288db69ea3107690efe06f6&id=9d24d91277&c=" +
+//         cbName +
+//         `&EMAIL=${encodeURIComponent(email)}` +
+//         `&UTM_SOURCE=${encodeURIComponent(utm.utm_source || "")}` +
+//         `&UTM_MEDIUM=${encodeURIComponent(utm.utm_medium || "")}` +
+//         `&UTM_CAMPAIGN=${encodeURIComponent(utm.utm_campaign || "")}` +
+//         `&UTM_CONTENT=${encodeURIComponent(utm.utm_content || "")}` +
+//         `&_=${Date.now()}`;
+
+//       const script = document.createElement("script");
+//       script.src = url;
+//       script.onerror = () => reject(new Error("script error"));
+
+//       document.body.appendChild(script);
+//     });
+
+//     // save locally
+//     localStorage.setItem("waitlistEmail", email);
+
+//     // Meta pixel
+//     if (typeof window !== "undefined" && (window as any).fbq) {
+//       (window as any).fbq("track", "Lead");
+//     }
+
+//     setSubmitted(true);
+
+//     setTimeout(() => {
+//       handleClose();
+//     }, 1500);
+
+//   } catch {
+//     setError("Something went wrong. Try again.");
+//   } finally {
+//     setLoading(false);
+//   }
+// };
+
+
+
+
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import { X, ArrowRight } from "lucide-react";
 
 interface WaitlistPopupProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-export default function WaitlistPopup({ isOpen, onClose }: WaitlistPopupProps) {
-  const [email, setEmail] = useState('');
+export default function WaitlistPopup({
+  isOpen,
+  onClose,
+}: WaitlistPopupProps) {
+  const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
-  // Handle visibility + localStorage safely
+  // ─────────────────────────────────────────────
+  // VISIBILITY CONTROL
+  // ─────────────────────────────────────────────
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
-    const submittedEmail = localStorage.getItem('waitlistEmail');
-    const closedBefore = localStorage.getItem('waitlistClosed');
+    const submittedEmail = localStorage.getItem("waitlistEmail");
+    const closedBefore = localStorage.getItem("waitlistClosed");
 
-    if (submittedEmail || closedBefore) {
-      setVisible(false);
-    } else {
-      setVisible(isOpen);
-    }
+    setVisible(!(submittedEmail || closedBefore) && isOpen);
   }, [isOpen]);
 
-  // Lock scroll
+  // ─────────────────────────────────────────────
+  // SCROLL LOCK
+  // ─────────────────────────────────────────────
   useEffect(() => {
-    if (visible) {
-      document.body.style.overflow = 'hidden';
-    }
-
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
+    document.body.style.overflow = visible ? "hidden" : "unset";
   }, [visible]);
 
   const handleClose = () => {
     setVisible(false);
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('waitlistClosed', 'true');
-    }
+    localStorage.setItem("waitlistClosed", "true");
     onClose();
   };
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setError('');
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    setError('Please enter a valid email');
-    return;
-  }
+  // ─────────────────────────────────────────────
+  // SUBMIT (STABLE MAILCHIMP JSONP)
+  // ─────────────────────────────────────────────
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
 
-  try {
-    setLoading(true);
+    if (loading) return;
 
-    await new Promise<void>((resolve, reject) => {
-      const cbName = `mc_cb_${Date.now()}`;
-      const timeout = setTimeout(() => reject(new Error("timeout")), 8000);
-
-      (window as any)[cbName] = () => {
-        clearTimeout(timeout);
-        delete (window as any)[cbName];
-        resolve();
-      };
-
-      const url =
-        "https://us15.list-manage.com/subscribe/post-json?u=55288db69ea3107690efe06f6&id=9d24d91277&c=" +
-        cbName +
-        `&EMAIL=${encodeURIComponent(email)}&_=${Date.now()}`;
-
-      const script = document.createElement("script");
-      script.src = url;
-      script.onerror = () => reject(new Error("script error"));
-
-      document.body.appendChild(script);
-    });
-
-    // ✅ save locally
-    localStorage.setItem("waitlistEmail", email);
-
-    // ✅ FIRE META PIXEL LEAD EVENT
-    if (typeof window !== "undefined" && (window as any).fbq) {
-      (window as any).fbq("track", "Lead");
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError("Please enter a valid email");
+      return;
     }
 
-    setSubmitted(true);
+    try {
+      setLoading(true);
 
-    setTimeout(() => {
-      handleClose();
-    }, 1500);
+      const stored = JSON.parse(localStorage.getItem("utm") || "{}");
+      const utm = stored.last_touch || {};
 
-  } catch {
-    setError("Something went wrong. Try again.");
-  } finally {
-    setLoading(false);
-  }
-};
-  // const handleSubmit = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   setError('');
+      const cbName = `mc_cb_${Date.now()}`;
 
-  //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  //   if (!emailRegex.test(email)) {
-  //     setError('Please enter a valid email');
-  //     return;
-  //   }
+      await new Promise<void>((resolve, reject) => {
+        const timeout = setTimeout(() => {
+          cleanup();
+          reject(new Error("timeout"));
+        }, 10000);
 
-  //   try {
-  //     setLoading(true);
+        const cleanup = () => {
+          clearTimeout(timeout);
+          delete (window as any)[cbName];
+          script.remove();
+        };
 
-  //     // 🔥 CALL YOUR BACKEND HERE (recommended)
-  //     const res = await fetch('/api/waitlist', {
-  //       method: 'POST',
-  //       headers: { 'Content-Type': 'application/json' },
-  //       body: JSON.stringify({ email }),
-  //     });
+        (window as any)[cbName] = () => {
+          cleanup();
+          resolve();
+        };
 
-  //     if (!res.ok) throw new Error('Failed');
+        const url =
+          "https://us15.list-manage.com/subscribe/post-json?u=55288db69ea3107690efe06f6&id=9d24d91277&c=" +
+          cbName +
+          `&EMAIL=${encodeURIComponent(email)}` +
+          `&MERGE7=${encodeURIComponent(utm.utm_source || "")}` +
+          `&MERGE8=${encodeURIComponent(utm.utm_medium || "")}` +
+          `&MERGE9=${encodeURIComponent(utm.utm_campaign || "")}` +
+          `&MERGE10=${encodeURIComponent(utm.utm_content || "")}` +
+          // `&MERGE11=${encodeURIComponent(JSON.stringify(stored))}` +
+          `&_=${Date.now()}`;
 
-  //     if (typeof window !== 'undefined') {
-  //       localStorage.setItem('waitlistEmail', email);
-  //     }
+        const script = document.createElement("script");
+        script.src = url;
 
-  //     setSubmitted(true);
+        script.onerror = () => {
+          cleanup();
+          reject(new Error("script error"));
+        };
 
-  //     setTimeout(() => {
-  //       handleClose();
-  //     }, 1500);
-  //   } catch (err) {
-  //     setError('Something went wrong. Try again.');
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+        document.body.appendChild(script);
+      });
+
+      localStorage.setItem("waitlistEmail", email);
+
+      setSubmitted(true);
+
+      setTimeout(() => {
+        handleClose();
+      }, 1500);
+
+    } catch (err) {
+      console.error(err);
+      setError("Something went wrong. Try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   if (!visible) return null;
 

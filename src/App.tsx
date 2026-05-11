@@ -13,17 +13,34 @@
 //     </>
 //   );
 // }
+import { useEffect } from "react";
 import Router from "./Router";
 import { CookieConsent } from "./components/CookieConsent";
+import { saveUTMsToStorage } from "./components/utm";
 
 export default function App() {
+  useEffect(() => {
+    saveUTMsToStorage();
+  }, []);
+
   return (
     <>
-      {/* Global cookie consent banner */}
       <CookieConsent />
-
-      {/* All routing is handled inside Router.tsx */}
       <Router />
     </>
   );
 }
+// import Router from "./Router";
+// import { CookieConsent } from "./components/CookieConsent";
+
+// export default function App() {
+//   return (
+//     <>
+//       {/* Global cookie consent banner */}
+//       <CookieConsent />
+
+//       {/* All routing is handled inside Router.tsx */}
+//       <Router />
+//     </>
+//   );
+// }

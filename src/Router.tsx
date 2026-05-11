@@ -196,7 +196,7 @@ import Join from "./formPage/Join";
 
 export default function Router() {
   const [currentPath, setCurrentPath] = useState<string>(
-    window.location.pathname
+   window.location.pathname.replace(/\/$/, "")
   );
 
   // ✅ SAFE: prevent crash during weird environments
