@@ -1260,7 +1260,7 @@ export default function WaitlistPopup({
                   Welcome to TARA
                 </h3>
                 <p className="text-neutral-600">
-                 YOU'RE ON THE LIST
+              You now have early access to TARA updates and releases.
                 </p>
               </motion.div>
             ) : (
@@ -1275,7 +1275,7 @@ export default function WaitlistPopup({
                   Be the first to try TARA.
                   </h3>
                   <p className="text-neutral-600 max-w-md mx-auto">
-                        Get early access to the first batch and 15% off at launch.                  </p>
+                        Get early access to the first batch.                  </p>
                 </motion.div>
 
                 {/* Form */}

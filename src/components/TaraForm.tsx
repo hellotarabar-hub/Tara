@@ -749,7 +749,7 @@ function SuccessScreen({ firstName }: { firstName: string }) {
           color: "rgba(255,255,255,0.45)", lineHeight: 1.75,
           marginBottom: 36, maxWidth: 300, margin: "0 auto 36px",
         }}>
-          We'll send you early access and your 15% discount before we launch.
+       You now have early access to TARA updates and releases.
         </p>
 
         {/* Spam tip card */}
