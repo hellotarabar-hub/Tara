@@ -566,25 +566,50 @@ export default function TastingCircle() {
           </div>
         </motion.div>
 
-           <motion.p
-            initial={{ opacity: 0, y: 12 }}
+           <motion.div
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: "easeOut", delay: 0.2 }}
             style={{
-              maxWidth: "26rem",
-              margin: "1.75rem auto 0",
-              color: "#6B5647",
-              lineHeight: 1.65,
-              fontFamily: "Jost, sans-serif",
-              fontWeight: 300,
-              fontSize: "0.95rem",
+              maxWidth: "30rem",
+              margin: "2rem auto 0",
+              borderRadius: "1.5rem",
+              border: "1.5px dashed rgba(193,113,75,0.5)",
+              background:
+                "linear-gradient(135deg, rgba(241,217,199,0.55) 0%, rgba(255,255,255,0.55) 100%)",
+              padding: "1.5rem 1.75rem",
+              textAlign: "center",
             }}
           >
-            Want a chance to get a box on us? Before your first bite, film your honest
-            reaction vertically in good natural light. You can upload it at the end of
-            the survey. If we select your video to feature, we&rsquo;ll send you a
-            complimentary box from our first commercial production run!
-          </motion.p>
+            <p
+              style={{
+                margin: "0 0 0.6rem",
+                color: "#A85F3D",
+                fontFamily: "Jost, sans-serif",
+                fontWeight: 700,
+                fontSize: "1.1rem",
+                letterSpacing: "0.01em",
+              }}
+            >
+              Want a chance to get a box on us? 📸🎁
+            </p>
+            <p
+              style={{
+                margin: 0,
+                color: "#6B5647",
+                lineHeight: 1.65,
+                fontFamily: "Jost, sans-serif",
+                fontWeight: 300,
+                fontSize: "0.95rem",
+              }}
+            >
+              Before your first bite, film your honest reaction vertically in good
+              natural light. You can upload it at the end of the survey. If we select
+              your video to feature, we&rsquo;ll send you a complimentary box from our
+              first commercial production run!
+            </p>
+          </motion.div>
+
 
         <motion.div
           style={{
