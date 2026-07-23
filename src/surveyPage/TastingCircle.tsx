@@ -566,6 +566,26 @@ export default function TastingCircle() {
           </div>
         </motion.div>
 
+           <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: "easeOut", delay: 0.2 }}
+            style={{
+              maxWidth: "26rem",
+              margin: "1.75rem auto 0",
+              color: "#6B5647",
+              lineHeight: 1.65,
+              fontFamily: "Jost, sans-serif",
+              fontWeight: 300,
+              fontSize: "0.95rem",
+            }}
+          >
+            Want a chance to get a box on us? Before your first bite, film your honest
+            reaction vertically in good natural light. You can upload it at the end of
+            the survey. If we select your video to feature, we&rsquo;ll send you a
+            complimentary box from our first commercial production run!
+          </motion.p>
+
         <motion.div
           style={{
             position: "absolute",
